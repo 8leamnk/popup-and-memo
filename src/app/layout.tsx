@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import StyledComponentsRegistry from '@/lib/registry';
 import GlobalStyle from '@/style/GlobalStyle';
+import History from '@/components/History';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -17,6 +18,7 @@ function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <GlobalStyle />
+          <History />
           <main>{children}</main>
         </StyledComponentsRegistry>
       </body>
