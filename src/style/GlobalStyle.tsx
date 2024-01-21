@@ -18,6 +18,11 @@ const GlobalStyle = createGlobalStyle`
   main {
     padding: 16px;
   }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 `;
 
 export default GlobalStyle;
