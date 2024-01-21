@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import StyledComponentsRegistry from '@/lib/registry';
+import GlobalStyle from '@/style/GlobalStyle';
 
 export const metadata: Metadata = {
-  title: 'Popup',
+  title: 'Home',
   description: 'Popup Implementation Walkthrough',
 };
 
@@ -14,7 +15,10 @@ function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <GlobalStyle />
+          <main>{children}</main>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
