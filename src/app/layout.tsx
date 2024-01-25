@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import ReduxProvider from '@/provider';
 import StyledComponentsRegistry from '@/lib/registry';
 import GlobalStyle from '@/style/GlobalStyle';
 import History from '@/components/History';
@@ -16,11 +17,13 @@ function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StyledComponentsRegistry>
-          <GlobalStyle />
-          <History />
-          <main>{children}</main>
-        </StyledComponentsRegistry>
+        <ReduxProvider>
+          <StyledComponentsRegistry>
+            <GlobalStyle />
+            <History />
+            <main>{children}</main>
+          </StyledComponentsRegistry>
+        </ReduxProvider>
       </body>
     </html>
   );
