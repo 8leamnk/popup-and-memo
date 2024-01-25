@@ -1,8 +1,8 @@
 export type HistoryType = string[];
 
-export interface PopupInfo {
+export interface PopupInner {
   title: string;
   content: string;
 }
 
-export type PopupData = PopupInfo[];
+export type PopupInfo = PopupInner | null;

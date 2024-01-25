@@ -3,6 +3,7 @@
 import React from 'react';
 import useHistory from '@/hooks/useHistory';
 import useComeBack from '@/hooks/useComeBack';
+import usePopupOpenCondition from '@/hooks/usePopupOpenCondition';
 
 const PATHNAME_HOME: string = '/';
 
@@ -12,6 +13,8 @@ function History() {
     history,
     targetPathname: PATHNAME_HOME,
   });
+
+  usePopupOpenCondition({ openCondition: isComebackHome });
 
   return '';
 }

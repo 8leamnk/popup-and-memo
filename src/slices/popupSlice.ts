@@ -8,7 +8,7 @@ interface InitialState {
 
 const initialState = {
   popupState: false,
-  popupInfo: {},
+  popupInfo: null,
 } as InitialState;
 
 const popupSlice = createSlice({
