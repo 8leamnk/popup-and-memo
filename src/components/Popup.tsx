@@ -38,36 +38,35 @@ const Inner = styled.div`
   }
 `;
 
+interface ButtonContent {
+  close: string;
+  retry: string;
+}
+
+const BUTTON_CONTENT: ButtonContent = {
+  close: '닫기',
+  retry: '재시도',
+};
+
 function Popup() {
-  const { popupState, popupInfo, closePopup } = usePopup();
+  const { popupInfo, isRetry, retryPopup, closePopup } = usePopup();
 
-  if (!popupState) {
-    return '';
+  if (popupInfo) {
+    return (
+      <Wrapper>
+        <Inner>
+          <h1>{popupInfo.title}</h1>
+          <p>{popupInfo.content}</p>
+          {isRetry && (
+            <button onClick={retryPopup}>{BUTTON_CONTENT.retry}</button>
+          )}
+          <button onClick={closePopup}>{BUTTON_CONTENT.close}</button>
+        </Inner>
+      </Wrapper>
+    );
   }
 
-  if (!popupInfo) {
-    // TODO: 팝업 정보가 없을 때 내용 보여주기
-    // return (
-    //   <Wrapper>
-    //     <Inner>
-    //       <h1></h1>
-    //       <p></p>
-    //       <button onClick={closePopup}>닫기</button>
-    //     </Inner>
-    //   </Wrapper>
-    // );
-    return '';
-  }
-
-  return (
-    <Wrapper>
-      <Inner>
-        <h1>{popupInfo.title}</h1>
-        <p>{popupInfo.content}</p>
-        <button onClick={closePopup}>닫기</button>
-      </Inner>
-    </Wrapper>
-  );
+  return '';
 }
 
 export default React.memo(Popup);

@@ -5,4 +5,14 @@ const popupData: PopupInner = {
   content: '팝업 내용',
 };
 
-export default popupData;
+function getPopupData(): Promise<PopupInner | null> {
+  return new Promise((resolve, reject) => {
+    if (popupData) {
+      resolve(popupData);
+    } else {
+      reject();
+    }
+  });
+}
+
+export default getPopupData;
