@@ -14,7 +14,7 @@ function History() {
     targetPathname: PATHNAME_HOME,
   });
 
-  usePopupOpenCondition({ openCondition: isComebackHome });
+  usePopupOpenCondition(isComebackHome);
 
   return '';
 }

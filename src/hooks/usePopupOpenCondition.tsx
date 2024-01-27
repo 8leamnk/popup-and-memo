@@ -4,11 +4,7 @@ import { useEffect } from 'react';
 import { handlePopupOpened } from '@/slices/popupSlice';
 import { useAppDispatch } from '@/provider/hooks';
 
-interface PopupOpenProps {
-  openCondition: boolean;
-}
-
-function usePopupOpenCondition({ openCondition }: PopupOpenProps) {
+function usePopupOpenCondition(openCondition: boolean) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
