@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
     color: #000;
     text-decoration: none;
   }
+
+  h1, p {
+    margin: 0;
+  }
 `;
 
 export default GlobalStyle;
