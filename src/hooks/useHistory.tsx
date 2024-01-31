@@ -1,12 +1,10 @@
 'use clinent';
 
-import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { HistoryType } from '@/constants/types';
 
-function useHistory(): HistoryType {
+function useHistory(pathname: string): HistoryType {
   const [history, setHistory] = useState<HistoryType>([]);
-  const pathname = usePathname();
 
   const saveHistory = useCallback(
     (curHistory: HistoryType, newPathname: string): HistoryType => {

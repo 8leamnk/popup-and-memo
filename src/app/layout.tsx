@@ -3,6 +3,8 @@ import ReduxProvider from '@/provider';
 import StyledComponentsRegistry from '@/lib/registry';
 import GlobalStyle from '@/style/GlobalStyle';
 import History from '@/components/History';
+import Header from '@/components/Header';
+import Popup from '@/components/Popup';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -21,7 +23,9 @@ function RootLayout({
           <StyledComponentsRegistry>
             <GlobalStyle />
             <History />
+            <Header />
             <main>{children}</main>
+            <Popup />
           </StyledComponentsRegistry>
         </ReduxProvider>
       </body>
