@@ -1,27 +1,27 @@
 'use clinent';
 
 import { useCallback, useEffect, useState } from 'react';
-import { HistoryType } from '@/constants/types';
+import { HistoryInfo } from '@/constants/types';
 
 interface ComeBackProps {
-  history: HistoryType;
+  historyInfo: HistoryInfo;
   targetPathname: string;
 }
 
-function useComeBack({ history, targetPathname }: ComeBackProps): boolean {
+function useComeBack({ historyInfo, targetPathname }: ComeBackProps): boolean {
   const [isComeback, setIsComeback] = useState<boolean>(false);
 
-  const catchComeBack = useCallback((curHistory: HistoryType): boolean => {
-    const [prevPathname, currPathname] = curHistory;
+  const catchComeBack = useCallback((curHistoryInfo: HistoryInfo): boolean => {
+    const { prevPathname, currPathname } = curHistoryInfo;
 
     return !!prevPathname && currPathname === targetPathname;
   }, []);
 
   useEffect(() => {
-    const isComebackTargetPathname = catchComeBack(history);
+    const isComebackTargetPathname = catchComeBack(historyInfo);
 
     setIsComeback(isComebackTargetPathname);
-  }, [history]);
+  }, [historyInfo]);
 
   return isComeback;
 }
