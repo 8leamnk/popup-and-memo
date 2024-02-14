@@ -8,12 +8,7 @@ describe('페이지 주소 저장 기능 테스트', () => {
     // given
     const INITIAL_PROPS: string = '/';
     const PATHNAMES: string[] = ['/about', '/my', '/', '/recruit'];
-    const HISTORIES: string[][] = [
-      ['/', '/about'],
-      ['/about', '/my'],
-      ['/my', '/'],
-      ['/', '/recruit'],
-    ];
+    const PREVIOUS = ['/', '/about', '/my', '/'];
 
     // when
     const { result, rerender } = renderHook(
@@ -24,11 +19,13 @@ describe('페이지 주소 저장 기능 테스트', () => {
     );
 
     // then
-    expect(result.current).toEqual([INITIAL_PROPS]);
+    expect(result.current.currPathname).toEqual(INITIAL_PROPS);
+    expect(result.current.prevPathname).toEqual(undefined);
 
     PATHNAMES.forEach((pathname, index) => {
       rerender(pathname);
-      expect(result.current).toEqual(HISTORIES[index]);
+      expect(result.current.currPathname).toEqual(PATHNAMES[index]);
+      expect(result.current.prevPathname).toEqual(PREVIOUS[index]);
     });
   });
 });
