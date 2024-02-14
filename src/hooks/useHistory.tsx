@@ -1,39 +1,89 @@
 'use clinent';
 
 import { useCallback, useEffect, useState } from 'react';
-import { HistoryInfo, HistoryType } from '@/constants/types';
+import { HistoryInfo, DoublyLinkedList, Node } from '@/constants/types';
+
+interface Pop {
+  list: DoublyLinkedList;
+  removedNode: Node | undefined;
+}
 
 function useHistory(pathname: string): HistoryInfo {
   const [historyInfo, setHistoryInfo] = useState<HistoryInfo>({
-    history: [],
+    history: {
+      head: null,
+      tail: null,
+      length: 0,
+    },
     prevPathname: undefined,
     currPathname: undefined,
   });
 
-  const saveHistory = useCallback(
-    (historyStack: HistoryType, newPathname: string): HistoryInfo => {
-      const newHistory = [...historyStack];
+  const push = useCallback(
+    (historyStack: DoublyLinkedList, newPathname: string) => {
+      const list: DoublyLinkedList = { ...historyStack };
+      const newNode: Node = { value: newPathname, prev: null, next: null };
 
-      newHistory.push(newPathname);
+      if (!list.tail) {
+        list.head = newNode;
+        list.tail = newNode;
+      } else {
+        newNode.prev = list.tail;
+        list.tail.next = newNode;
+        list.tail = newNode;
+      }
+
+      list.length += 1;
+
+      return list;
+    },
+    [],
+  );
+
+  const pop = useCallback((historyStack: DoublyLinkedList): Pop => {
+    const list: DoublyLinkedList = { ...historyStack };
+
+    if (!list.tail) {
+      return { list, removedNode: undefined };
+    }
+
+    const currentTail = list.tail;
+
+    if (list.length === 1) {
+      list.head = null;
+      list.tail = null;
+    } else {
+      list.tail = currentTail.prev;
+      list.tail.next = null;
+      currentTail.prev = null;
+    }
+
+    list.length -= 1;
+
+    return { list, removedNode: currentTail };
+  }, []);
+
+  const saveHistory = useCallback(
+    (history: DoublyLinkedList, newPathname: string): HistoryInfo => {
+      const list = push(history, newPathname);
 
       return {
-        history: newHistory,
-        prevPathname: historyStack.at(-1),
-        currPathname: newPathname,
+        history: list,
+        prevPathname: list.tail?.prev?.value,
+        currPathname: list.tail?.value,
       };
     },
     [],
   );
 
   const removeHistory = useCallback(
-    (historyStack: HistoryType): HistoryInfo => {
-      const newHistory = [...historyStack];
-      const newPrev = newHistory.pop();
+    (history: DoublyLinkedList): HistoryInfo => {
+      const { list, removedNode } = pop(history);
 
       return {
-        history: newHistory,
-        prevPathname: newPrev,
-        currPathname: newHistory.at(-1),
+        history: list,
+        prevPathname: removedNode?.value,
+        currPathname: list.tail?.value,
       };
     },
     [],
@@ -45,7 +95,7 @@ function useHistory(pathname: string): HistoryInfo {
   }, []);
 
   const updateHistory = useCallback(
-    (history: HistoryType, newPathname: string): HistoryInfo => {
+    (history: DoublyLinkedList, newPathname: string): HistoryInfo => {
       const isBack = catchBack();
 
       if (isBack) {
@@ -60,7 +110,7 @@ function useHistory(pathname: string): HistoryInfo {
   useEffect(() => {
     const { history } = historyInfo;
 
-    if (history.at(-1) !== pathname) {
+    if (history.tail?.value !== pathname) {
       const newHistoryInfo = updateHistory(history, pathname);
 
       setHistoryInfo((curState) => ({ ...curState, ...newHistoryInfo }));
