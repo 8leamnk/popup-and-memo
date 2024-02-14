@@ -10,9 +10,9 @@ const PATHNAME_HOME: string = '/';
 
 function History() {
   const pathname = usePathname();
-  const history = useHistory(pathname);
+  const historyInfo = useHistory(pathname);
   const isComebackHome = useComeBack({
-    history,
+    historyInfo,
     targetPathname: PATHNAME_HOME,
   });
 
