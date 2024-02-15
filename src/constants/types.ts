@@ -1,22 +1,31 @@
-export type HistoryType = string[];
+type pathnameType<T> = T | undefined;
 
-type pathnameType = string | undefined;
-
-export interface HistoryInfo {
-  history: DoublyLinkedList;
-  prevPathname: pathnameType;
-  currPathname: pathnameType;
+export interface HistoryInfo<T> {
+  history: SinglyLinkedList<T>;
+  prevPathname: pathnameType<T>;
+  currPathname: pathnameType<T>;
 }
 
-export interface Node {
-  value: string;
-  prev: Node | null;
-  next: Node | null;
+export interface SinglyNode<T> {
+  value: T;
+  next: SinglyNode<T> | null;
 }
 
-export interface DoublyLinkedList {
-  head: Node | null;
-  tail: Node | null;
+export interface SinglyLinkedList<T> {
+  first: SinglyNode<T> | null;
+  last: SinglyNode<T> | null;
+  size: number;
+}
+
+export interface DoublyNode<T> {
+  value: T;
+  prev: DoublyNode<T> | null;
+  next: DoublyNode<T> | null;
+}
+
+export interface DoublyLinkedList<T> {
+  head: DoublyNode<T> | null;
+  tail: DoublyNode<T> | null;
   length: number;
 }
 
