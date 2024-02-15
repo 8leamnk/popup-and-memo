@@ -19,6 +19,7 @@ export const SinglyLinkedListMethods = {
     }
 
     list.size += 1;
+
     return list;
   },
 
@@ -32,12 +33,12 @@ export const SinglyLinkedListMethods = {
     const removedNode = list.first;
 
     if (list.first === list.last) {
-      list.first = null;
-    } else {
-      list.first = removedNode.next;
+      list.last = null;
     }
 
+    list.first = removedNode.next;
     list.size -= 1;
+
     return { list, removedNode };
   },
 };
