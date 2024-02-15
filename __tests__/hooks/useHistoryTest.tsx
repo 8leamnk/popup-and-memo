@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react';
 import useHistory from '@/hooks/useHistory';
 
 describe('페이지 주소 저장 기능 테스트', () => {
-  test('주소를 이동할 때마다 최대 2개의 페이지 주소 기록이 쌓인다.', () => {
+  test('주소를 이동할 때마다 현재 페이지와 이전 페이지를 가져온다.', () => {
     // given
     const INITIAL_PROPS: string = '/';
     const PATHNAMES: string[] = ['/about', '/my', '/', '/recruit'];
@@ -12,7 +12,7 @@ describe('페이지 주소 저장 기능 테스트', () => {
 
     // when
     const { result, rerender } = renderHook(
-      (props: string) => useHistory(props),
+      (props: string) => useHistory<string>(props),
       {
         initialProps: INITIAL_PROPS,
       },
