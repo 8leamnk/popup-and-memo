@@ -32,6 +32,7 @@ export interface DoublyLinkedList<T> {
 export interface PopupInner {
   title: string;
   content: string;
+  popupNumber: number;
 }
 
 export type PopupInfo = PopupInner | null;

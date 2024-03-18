@@ -9,7 +9,7 @@ function usePopupOpenCondition(openCondition: boolean) {
 
   useEffect(() => {
     if (openCondition) {
-      dispatch(handlePopupOpened(true));
+      dispatch(handlePopupOpened());
     }
   }, [openCondition]);
 }
