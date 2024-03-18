@@ -1,4 +1,4 @@
-'use clinent';
+'use client';
 
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/provider/hooks';
