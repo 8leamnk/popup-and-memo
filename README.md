@@ -13,9 +13,9 @@
 
 ```
 [
-  { id: 1, content: '광고', popupNumber: 100 },
-  { id: 2, content: '안내', popupNumber: 1 },
-  { id: 3, content: '공지', popupNumber: 57 },
+  { title: '팝업 NO.1', content: '광고', popupNumber: 1 },
+  { title: '팝업 NO.2', content: '안내', popupNumber: 2 },
+  { title: '팝업 NO.3', content: '공지', popupNumber: 3 },
   // ...
 ]
 ```
