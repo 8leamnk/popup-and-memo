@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/provider/hooks';
 import { getPopupInfo } from '@/slices/popupSlice';
-import getPopupData from '@/constants/dummyData';
+import getPopupData, { ERROR_MESSAGE } from '@/constants/dummyData';
 import { PopupInner } from '@/constants/types';
 
 function usePopup() {
@@ -15,19 +15,15 @@ function usePopup() {
   const fetchPopupData = async (): Promise<void> => {
     try {
       const data: PopupInner[] = await getPopupData();
-      setIsretry(false);
 
       for (let i = 0; i < data.length; i += 1) {
         const item = data[i];
         setPopupData((curState) => curState.set(item.popupNumber, item));
       }
+
+      setIsretry(false);
     } catch (error: unknown) {
       setIsretry(true);
-
-      if (error instanceof Error) {
-        const content = error.message;
-        dispatch(getPopupInfo({ title: '에러', content, popupNumber: 0 }));
-      }
     }
   };
 
@@ -41,7 +37,9 @@ function usePopup() {
   };
 
   useEffect(() => {
-    if (popupState > 0 && popupState <= popupData.size) {
+    if (isRetry) {
+      dispatch(getPopupInfo(ERROR_MESSAGE));
+    } else if (popupState > 0 && popupState <= popupData.size) {
       const newPopupInfo = popupData.get(popupState);
       dispatch(getPopupInfo(newPopupInfo));
     }

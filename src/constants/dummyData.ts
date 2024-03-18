@@ -1,6 +1,10 @@
 import { PopupInner } from './types';
 
-const ERROR_MESSAGE: string = '팝업 정보를 받아오는 중 에러가 발생했습니다.';
+export const ERROR_MESSAGE: PopupInner = {
+  title: '오류',
+  content: '팝업 정보를 받아오는 중 에러가 발생했습니다.',
+  popupNumber: 0,
+};
 
 function getPopupData(): Promise<PopupInner[]> {
   return new Promise((resolve, reject) => {
@@ -19,7 +23,7 @@ function getPopupData(): Promise<PopupInner[]> {
     if (popupData.length > 0) {
       resolve(popupData);
     } else {
-      reject(new Error(ERROR_MESSAGE));
+      reject(new Error());
     }
   });
 }
