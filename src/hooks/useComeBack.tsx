@@ -1,4 +1,4 @@
-'use clinent';
+'use client';
 
 import { useCallback, useEffect, useState } from 'react';
 import { HistoryInfo } from '@/constants/types';
