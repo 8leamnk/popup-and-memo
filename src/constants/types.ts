@@ -36,3 +36,8 @@ export interface PopupInner {
 }
 
 export type PopupInfo = PopupInner | null;
+
+export interface PageInfo {
+  name: string;
+  href: string;
+}

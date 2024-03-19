@@ -1,9 +1,10 @@
 import ReduxProvider from '@/provider';
 import StyledComponentsRegistry from '@/lib/registry';
 import Theme from '@/style/Theme';
-import History from '@/components/History';
-import Header from '@/components/Header';
-import Popup from '@/components/Popup';
+import History from '@/components/Atoms/History';
+import Header from '@/components/Organisms/Header';
+import Popup from '@/components/Molcules/Popup';
+import Main from '@/components/Molcules/Main';
 
 function RootLayout({
   children,
@@ -18,7 +19,7 @@ function RootLayout({
             <Theme>
               <History />
               <Header />
-              <main>{children}</main>
+              <Main>{children}</Main>
               <Popup />
             </Theme>
           </StyledComponentsRegistry>

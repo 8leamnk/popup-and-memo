@@ -3,6 +3,7 @@
 import React from 'react';
 import usePopup from '@/hooks/usePopup';
 import styled from 'styled-components';
+import Button from '../Atoms/Button';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -10,7 +11,7 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
   position: fixed;
   top: 0;
   left: 0;
@@ -22,20 +23,16 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.primary};
   padding: 24px;
   border-radius: 6px;
+  box-shadow: 3px 6px 9px 0 rgba(0, 0, 0, 0.16);
+`;
 
-  h1 {
-    font-size: 24px;
-  }
-
-  button {
-    width: 100%;
-    height: 48px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
+const DecisionButton = styled(Button)`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.tertiary};
+  border: ${({ theme }) => `2px solid ${theme.colors.quaternary}`};
 `;
 
 interface ButtonContent {
@@ -58,9 +55,13 @@ function Popup() {
           <h1>{popupInfo.title}</h1>
           <p>{popupInfo.content}</p>
           {isRetry && (
-            <button onClick={retryPopup}>{BUTTON_CONTENT.retry}</button>
+            <DecisionButton onClick={retryPopup}>
+              {BUTTON_CONTENT.retry}
+            </DecisionButton>
           )}
-          <button onClick={closePopup}>{BUTTON_CONTENT.close}</button>
+          <DecisionButton onClick={closePopup}>
+            {BUTTON_CONTENT.close}
+          </DecisionButton>
         </Inner>
       </Wrapper>
     );
