@@ -1,6 +1,6 @@
 import ReduxProvider from '@/provider';
 import StyledComponentsRegistry from '@/lib/registry';
-import GlobalStyle from '@/style/GlobalStyle';
+import Theme from '@/style/Theme';
 import History from '@/components/History';
 import Header from '@/components/Header';
 import Popup from '@/components/Popup';
@@ -15,11 +15,12 @@ function RootLayout({
       <body>
         <ReduxProvider>
           <StyledComponentsRegistry>
-            <GlobalStyle />
-            <History />
-            <Header />
-            <main>{children}</main>
-            <Popup />
+            <Theme>
+              <History />
+              <Header />
+              <main>{children}</main>
+              <Popup />
+            </Theme>
           </StyledComponentsRegistry>
         </ReduxProvider>
       </body>

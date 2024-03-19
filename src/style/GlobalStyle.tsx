@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
   ${normalize}
 
   * {
+    color: ${({ theme }) => theme.colors.black};
+    font-size: ${({ theme }) => `${theme.fontSize.base}px`};
     box-sizing: border-box;
   }
 
@@ -15,16 +17,17 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-  main {
-    padding: 16px;
-  }
-
   a {
-    color: #000;
+    color: ${({ theme }) => theme.colors.black};
     text-decoration: none;
   }
 
-  h1, p {
+  h1 {
+    font-size: ${({ theme }) => `${theme.fontSize.xLarge}px`};
+    margin: 0;
+  }
+  
+  p {
     margin: 0;
   }
 `;
