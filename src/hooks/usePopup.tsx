@@ -29,12 +29,18 @@ function usePopup() {
   };
 
   const fetchPopupData = async (): Promise<void> => {
-    const response = await fetch('/api/popup');
-    const result = await response.json();
+    try {
+      const response = await fetch('/api/popup');
+      const result = await response.json();
 
-    if (result.status === 200) {
-      setPopupData(changeDataStructure(result.data));
-      setIsretry(false);
+      if (result.status === 200) {
+        setPopupData(changeDataStructure(result.data));
+        setIsretry(false);
+      } else {
+        setIsretry(true);
+      }
+    } catch (error: unknown) {
+      setIsretry(true);
     }
   };
 
