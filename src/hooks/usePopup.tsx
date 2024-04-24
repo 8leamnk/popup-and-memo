@@ -3,8 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/provider/hooks';
 import { getPopupInfo } from '@/slices/popupSlice';
-import getPopupData, { ERROR_MESSAGE } from '@/constants/dummyData';
 import { PopupInner } from '@/constants/types';
+
+const ERROR_MESSAGE: PopupInner = {
+  title: '오류',
+  content: '팝업 정보를 받아오는 중 에러가 발생했습니다.',
+  popupNumber: 0,
+};
 
 function usePopup() {
   const { popupState, popupInfo } = useAppSelector((state) => state.popup);
@@ -12,18 +17,24 @@ function usePopup() {
   const [popupData, setPopupData] = useState(new Map());
   const [isRetry, setIsretry] = useState<boolean>(false);
 
+  const changeDataStructure = (data: PopupInner[]) => {
+    const changedData = new Map();
+
+    for (let i = 0; i < data.length; i += 1) {
+      const item = data[i];
+      changedData.set(item.popupNumber, item);
+    }
+
+    return changedData;
+  };
+
   const fetchPopupData = async (): Promise<void> => {
-    try {
-      const data: PopupInner[] = await getPopupData();
+    const response = await fetch('/api/popup');
+    const result = await response.json();
 
-      for (let i = 0; i < data.length; i += 1) {
-        const item = data[i];
-        setPopupData((curState) => curState.set(item.popupNumber, item));
-      }
-
+    if (result.status === 200) {
+      setPopupData(changeDataStructure(result.data));
       setIsretry(false);
-    } catch (error: unknown) {
-      setIsretry(true);
     }
   };
 
