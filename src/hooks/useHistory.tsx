@@ -46,7 +46,7 @@ function useHistory() {
     [],
   );
 
-  return updateHistory;
+  return { updateHistory };
 }
 
 export default useHistory;

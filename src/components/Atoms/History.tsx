@@ -10,7 +10,7 @@ function History() {
   const { historyInfo } = useAppSelector((state) => state.history);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const updateHistory = useHistory();
+  const { updateHistory } = useHistory();
 
   useEffect(() => {
     const { history } = historyInfo;
