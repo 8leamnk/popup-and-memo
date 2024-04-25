@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   description: 'Popup Implementation Walkthrough',
 };
 
-function About() {
-  return '마이 페이지 입니다.';
+function MyPageLayout({ children }: { children: React.ReactNode }) {
+  return <div>{children}</div>;
 }
 
-export default About;
+export default MyPageLayout;
