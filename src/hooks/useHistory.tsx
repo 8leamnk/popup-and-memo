@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 import { SinglyLinkedListMethods } from '@/utils/util';
 import { SinglyLinkedList } from '@/constants/types';
 
-function useHistory(pathname: string) {
+function useHistory() {
   const saveHistory = useCallback(
     (history: SinglyLinkedList<string>, newPathname: string) => {
       const list = SinglyLinkedListMethods.push<string>(history, newPathname);
