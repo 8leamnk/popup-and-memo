@@ -1,27 +1,18 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HistoryInfo } from '@/constants/types';
+import { useAppSelector } from '@/provider/hooks';
 
-interface ComeBackProps<T> {
-  historyInfo: HistoryInfo<T>;
-  targetPathname: T;
-}
-
-function useComeBack<T>({
-  historyInfo,
-  targetPathname,
-}: ComeBackProps<T>): boolean {
+function useComeBack(targetPathname: string): boolean {
+  const { historyInfo } = useAppSelector((state) => state.history);
   const [isComeback, setIsComeback] = useState<boolean>(false);
 
-  const catchComeBack = useCallback(
-    (curHistoryInfo: HistoryInfo<T>): boolean => {
-      const { prevPathname, currPathname } = curHistoryInfo;
+  const catchComeBack = (curHistoryInfo: HistoryInfo): boolean => {
+    const { prevPathname, currPathname } = curHistoryInfo;
 
-      return !!prevPathname && currPathname === targetPathname;
-    },
-    [],
-  );
+    return !!prevPathname && currPathname === targetPathname;
+  };
 
   useEffect(() => {
     const isComebackTargetPathname = catchComeBack(historyInfo);

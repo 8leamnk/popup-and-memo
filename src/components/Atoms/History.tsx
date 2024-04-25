@@ -1,24 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { useAppDispatch, useAppSelector } from '@/provider/hooks';
 import useHistory from '@/hooks/useHistory';
-import useComeBack from '@/hooks/useComeBack';
-import usePopupOpenCondition from '@/hooks/usePopupOpenCondition';
-
-const PATHNAME_HOME: string = '/';
+import { handleAddHistoryInfo } from '@/slices/historySlice';
 
 function History() {
+  const { historyInfo } = useAppSelector((state) => state.history);
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const historyInfo = useHistory<string>(pathname);
-  const isComebackHome = useComeBack<string>({
-    historyInfo,
-    targetPathname: PATHNAME_HOME,
-  });
+  const updateHistory = useHistory(pathname);
 
-  usePopupOpenCondition(isComebackHome);
+  useEffect(() => {
+    const { history } = historyInfo;
 
-  return '';
+    if (history.first?.value !== pathname) {
+      const newHistoryInfo = updateHistory(history, pathname);
+
+      dispatch(handleAddHistoryInfo(newHistoryInfo));
+    }
+  }, [pathname]);
+
+  return <></>;
 }
 
 export default React.memo(History);

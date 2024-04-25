@@ -1,22 +1,13 @@
 'use client';
 
 import React from 'react';
-import usePopup from '@/hooks/usePopup';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '@/provider/hooks';
+import { getPopupInfo } from '@/slices/popupSlice';
+import useHomeEventPopup from '@/hooks/useHomeEventPopup';
+import useComeBack from '@/hooks/useComeBack';
 import Button from '../Atoms/Button';
-
-const Wrapper = styled.section`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.4);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
+import ModalBack from '../Atoms/ModalBack';
 
 const Inner = styled.div`
   width: 480px;
@@ -45,29 +36,41 @@ const BUTTON_CONTENT: ButtonContent = {
   retry: '재시도',
 };
 
+const PATHNAME_HOME: string = '/';
+
 function Popup() {
-  const { popupInfo, isRetry, retryPopup, closePopup } = usePopup();
+  const { popupInfo } = useAppSelector((state) => state.popup);
+  const dispatch = useAppDispatch();
+  const isComebackHome = useComeBack(PATHNAME_HOME);
+  const { isRetry, retryPopup } = useHomeEventPopup(isComebackHome);
+
+  const closePopup = (): void => {
+    dispatch(getPopupInfo(null));
+  };
 
   if (popupInfo) {
     return (
-      <Wrapper>
+      <ModalBack>
         <Inner>
           <h1>{popupInfo.title}</h1>
+
           <p>{popupInfo.content}</p>
+
           {isRetry && (
             <DecisionButton onClick={retryPopup}>
               {BUTTON_CONTENT.retry}
             </DecisionButton>
           )}
+
           <DecisionButton onClick={closePopup}>
             {BUTTON_CONTENT.close}
           </DecisionButton>
         </Inner>
-      </Wrapper>
+      </ModalBack>
     );
   }
 
-  return '';
+  return <></>;
 }
 
 export default React.memo(Popup);
