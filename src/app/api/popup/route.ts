@@ -1,18 +1,27 @@
-import { PopupInner } from '@/constants/types';
+import { PopupServerData } from '@/constants/types';
+
+const getRandomPopups = () => {
+  const data: PopupServerData = {};
+  const MAX = 10;
+
+  while (Object.keys(data).length < MAX) {
+    const random = Math.floor(Math.random() * MAX) + 1;
+
+    if (!data[random]) {
+      data[random] = {
+        title: `팝업 NO.${random}`,
+        content: `${random}번째 팝업입니다.`,
+        popupNumber: random,
+      };
+    }
+  }
+
+  return data;
+};
 
 export async function GET() {
   try {
-    const START = 1;
-    const END = 10;
-    const data: PopupInner[] = [];
-
-    for (let i = START; i <= END; i += 1) {
-      data.push({
-        title: `팝업 NO.${i}`,
-        content: `${i}번째 팝업입니다.`,
-        popupNumber: i,
-      });
-    }
+    const data = getRandomPopups();
 
     return Response.json({ status: 200, data });
   } catch (error) {
