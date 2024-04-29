@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 function MyPageLayout({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+  return <section>{children}</section>;
 }
 
 export default MyPageLayout;
