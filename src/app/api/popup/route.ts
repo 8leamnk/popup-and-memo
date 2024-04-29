@@ -25,6 +25,6 @@ export async function GET() {
 
     return Response.json({ status: 200, data });
   } catch (error) {
-    return Response.json({ status: 500, message: 'failed to fetch data' });
+    return;
   }
 }

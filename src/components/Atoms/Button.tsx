@@ -13,13 +13,12 @@ const S = {
   `,
 };
 
-function Button({
-  children,
-  ...rest
-}: {
+interface ButtonProps {
   children: string;
-  onClick: () => void;
-}) {
+  onClick: (() => void) | ((e: React.FormEvent) => Promise<void>);
+}
+
+function Button({ children, ...rest }: ButtonProps) {
   return <S.Button {...rest}>{children}</S.Button>;
 }
 
