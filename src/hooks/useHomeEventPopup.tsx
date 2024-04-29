@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '@/provider/hooks';
 import { getPopupInfo, handleHomeEventPopupIndex } from '@/slices/popupSlice';
 import { PopupInner, PopupServerData } from '@/constants/types';
@@ -19,11 +20,12 @@ function useHomeEventPopup(isComebackHome: boolean) {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const response = await fetch('/api/popup');
-      const result = await response.json();
+      const { data } = await axios.get('/api/popup');
 
-      if (result.status === 200) {
-        setPopupData(result.data);
+      // console.log('data', data);
+
+      if (data.status === 200) {
+        setPopupData(data.data);
         setIsretry(false);
       } else {
         setIsretry(true);
