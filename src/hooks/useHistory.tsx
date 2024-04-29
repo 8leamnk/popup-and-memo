@@ -1,4 +1,4 @@
-'use clinent';
+'use client';
 
 import { useCallback } from 'react';
 import { SinglyLinkedListMethods } from '@/utils/util';
