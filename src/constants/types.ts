@@ -45,3 +45,10 @@ export interface PageInfo {
   name: string;
   href: string;
 }
+
+export interface MemoType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+}

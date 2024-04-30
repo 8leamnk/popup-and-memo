@@ -15,7 +15,7 @@ const S = {
 
 interface ButtonProps {
   children: string;
-  onClick: (() => void) | ((e: React.FormEvent) => Promise<void>);
+  onClick?: (() => void) | ((e: React.FormEvent) => Promise<void>);
 }
 
 function Button({ children, ...rest }: ButtonProps) {
