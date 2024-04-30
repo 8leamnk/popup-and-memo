@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { PageInfo } from '@/constants/types';
+import { useMemo } from 'react';
 
 const Page = styled(Link)<{ $isActive: boolean }>`
   display: block;
@@ -15,9 +16,16 @@ const Page = styled(Link)<{ $isActive: boolean }>`
 
 function PageLink({ pageInfo, ...rest }: { pageInfo: PageInfo }) {
   const pathname = usePathname();
+  const isActive = useMemo(() => {
+    if (pageInfo.href === '/') {
+      return pathname === pageInfo.href;
+    }
+
+    return pathname.includes(pageInfo.href);
+  }, [pageInfo]);
 
   return (
-    <Page href={pageInfo.href} $isActive={pathname === pageInfo.href} {...rest}>
+    <Page href={pageInfo.href} $isActive={isActive} {...rest}>
       {pageInfo.name}
     </Page>
   );
