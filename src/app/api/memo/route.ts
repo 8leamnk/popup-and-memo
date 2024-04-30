@@ -2,6 +2,32 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const id = Number(searchParams.get('id'));
+  const isUnique = Number(searchParams.get('isUnique'));
+
+  try {
+    let result = null;
+
+    if (isUnique) {
+      const response = await prisma.memo.findUnique({ where: { id } });
+      result = { ...response, id: Number(response?.id) };
+    } else {
+      const response = await prisma.memo.findMany({
+        where: { id: { gte: id, lte: id + 9 } },
+      });
+      result = response.map((item) => {
+        return { ...item, id: Number(item.id) };
+      });
+    }
+
+    return Response.json({ data: result });
+  } catch (error) {
+    return;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
