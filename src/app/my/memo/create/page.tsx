@@ -8,12 +8,12 @@ import { useAppDispatch } from '@/provider/hooks';
 import { getPopupInfo } from '@/slices/popupSlice';
 import useInput from '@/hooks/useInput';
 import useTextarea from '@/hooks/useTextarea';
+import useValidationString from '@/hooks/useValidationString';
 import Form from '../../../../components/Molcules/Form';
 import Label from '../../../../components/Molcules/Label';
 import Input from '../../../../components/Atoms/Input';
 import Textarea from '../../../../components/Atoms/Textarea';
 import Button from '../../../../components/Atoms/Button';
-import useValidationString from '@/hooks/useValidationString';
 
 const MemoButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.littleBoyBlue};

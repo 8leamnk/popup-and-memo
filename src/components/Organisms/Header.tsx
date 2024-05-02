@@ -3,10 +3,14 @@
 import styled from 'styled-components';
 import Navigation from '../Molcules/Navigation';
 import PageLink from '../Atoms/PageLink';
+import LoginOrLogout from '../Molcules/LoginOrLogout';
 import { PageInfo } from '@/constants/types';
 
 // style
 const Wrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: ${({ theme }) => `${theme.fixedValues.headerHeight}px`};
   padding: 16px;
@@ -32,6 +36,8 @@ function Header() {
           <PageLink key={page.href} pageInfo={page} />
         ))}
       </Navigation>
+
+      <LoginOrLogout />
     </Wrapper>
   );
 }
