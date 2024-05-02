@@ -1,12 +1,11 @@
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Popup Implementation Walkthrough',
-};
+'use client';
 
 function App() {
-  return '홈';
+  return (
+    <>
+      <h1>홈</h1>
+    </>
+  );
 }
 
 export default App;
