@@ -21,7 +21,7 @@ const Wrapper = styled.header`
 const PAGES: PageInfo[] = [
   { name: 'HOME', href: '/' },
   { name: 'ABOUT', href: '/about' },
-  { name: 'MY PAGE', href: '/my-page' },
+  { name: 'MY', href: '/my' },
 ];
 
 function Header() {

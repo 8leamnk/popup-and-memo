@@ -1,19 +1,13 @@
-'use clinent';
+'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { SinglyLinkedListMethods } from '@/utils/util';
-import { HistoryInfo, SinglyLinkedList } from '@/constants/types';
+import { SinglyLinkedList } from '@/constants/types';
 
-function useHistory<T>(pathname: T): HistoryInfo<T> {
-  const [historyInfo, setHistoryInfo] = useState<HistoryInfo<T>>({
-    history: { first: null, last: null, size: 0 },
-    prevPathname: undefined,
-    currPathname: undefined,
-  });
-
+function useHistory() {
   const saveHistory = useCallback(
-    (history: SinglyLinkedList<T>, newPathname: T) => {
-      const list = SinglyLinkedListMethods.push<T>(history, newPathname);
+    (history: SinglyLinkedList<string>, newPathname: string) => {
+      const list = SinglyLinkedListMethods.push<string>(history, newPathname);
 
       return {
         history: list,
@@ -24,8 +18,8 @@ function useHistory<T>(pathname: T): HistoryInfo<T> {
     [],
   );
 
-  const removeHistory = useCallback((history: SinglyLinkedList<T>) => {
-    const { list, removedNode } = SinglyLinkedListMethods.pop<T>(history);
+  const removeHistory = useCallback((history: SinglyLinkedList<string>) => {
+    const { list, removedNode } = SinglyLinkedListMethods.pop<string>(history);
 
     return {
       history: list,
@@ -40,7 +34,7 @@ function useHistory<T>(pathname: T): HistoryInfo<T> {
   }, []);
 
   const updateHistory = useCallback(
-    (history: SinglyLinkedList<T>, newPathname: T) => {
+    (history: SinglyLinkedList<string>, newPathname: string) => {
       const isBack = catchBack();
 
       if (isBack) {
@@ -52,17 +46,7 @@ function useHistory<T>(pathname: T): HistoryInfo<T> {
     [],
   );
 
-  useEffect(() => {
-    const { history } = historyInfo;
-
-    if (history.first?.value !== pathname) {
-      const newHistoryInfo = updateHistory(history, pathname);
-
-      setHistoryInfo({ ...historyInfo, ...newHistoryInfo });
-    }
-  }, [pathname]);
-
-  return historyInfo;
+  return { updateHistory };
 }
 
 export default useHistory;

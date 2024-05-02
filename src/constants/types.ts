@@ -1,9 +1,9 @@
-type pathnameType<T> = T | undefined;
+type pathnameType = string | undefined;
 
-export interface HistoryInfo<T> {
-  history: SinglyLinkedList<T>;
-  prevPathname: pathnameType<T>;
-  currPathname: pathnameType<T>;
+export interface HistoryInfo {
+  history: SinglyLinkedList<string>;
+  prevPathname: pathnameType;
+  currPathname: pathnameType;
 }
 
 export interface SinglyNode<T> {
@@ -32,7 +32,11 @@ export interface DoublyLinkedList<T> {
 export interface PopupInner {
   title: string;
   content: string;
-  popupNumber: number;
+  popupNumber?: number;
+}
+
+export interface PopupServerData {
+  [key: number]: PopupInner;
 }
 
 export type PopupInfo = PopupInner | null;
@@ -40,4 +44,11 @@ export type PopupInfo = PopupInner | null;
 export interface PageInfo {
   name: string;
   href: string;
+}
+
+export interface MemoType {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
 }
