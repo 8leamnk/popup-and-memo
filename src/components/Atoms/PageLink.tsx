@@ -22,7 +22,7 @@ function PageLink({ pageInfo, ...rest }: { pageInfo: PageInfo }) {
     }
 
     return pathname.includes(pageInfo.href);
-  }, [pageInfo]);
+  }, [pathname, pageInfo]);
 
   return (
     <Page href={pageInfo.href} $isActive={isActive} {...rest}>
