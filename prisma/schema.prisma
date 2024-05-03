@@ -14,7 +14,7 @@ model Memo {
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   title     String?  @default("")
   content   String?  @default("")
-  userId    String?  @default("")
+  email     String   @default("")
 }
 
 model Account {
