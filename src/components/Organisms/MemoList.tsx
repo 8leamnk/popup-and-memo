@@ -3,17 +3,21 @@
 import { useEffect, useMemo, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { MemoType } from '@/constants/types';
 import Table from '../Molcules/Table';
 import TableHeader from '../Molcules/TableHeader';
 import TableBody from '../Molcules/TableBody';
 
 function MemoList() {
+  const { data: session } = useSession();
   const [memoList, setMemoList] = useState<MemoType[]>([]);
 
-  const getMemo = async (id: number) => {
+  const getMemo = async () => {
     try {
-      const response = await axios.get(`/api/memo/?id=${id}&isUnique=0`);
+      const response = await axios.get(
+        `/api/memo?email=${session?.user?.email}&isUnique=0`,
+      );
 
       setMemoList(response.data.data);
     } catch (error: unknown) {
@@ -22,7 +26,7 @@ function MemoList() {
   };
 
   useEffect(() => {
-    getMemo(1);
+    getMemo();
   }, []);
 
   const headerInfo = useMemo(
@@ -39,12 +43,12 @@ function MemoList() {
       <Table width="720px">
         <TableHeader headerInfo={headerInfo} />
 
-        {memoList.map((memo) => {
+        {memoList.map((memo, index) => {
           const bodyInfo = [
             {
               id: 1,
               description: '번호',
-              children: memo.id,
+              children: index + 1,
               fontWeight: 'normal',
               width: headerInfo[0].width,
               flex: headerInfo[0].flex,

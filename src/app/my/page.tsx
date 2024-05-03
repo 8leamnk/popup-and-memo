@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import Button from '@/components/Atoms/Button';
 import MemoList from '@/components/Organisms/MemoList';
@@ -11,15 +12,21 @@ const PostButton = styled(Button)`
 `;
 
 function MyPage() {
+  const { status } = useSession();
+
   return (
     <>
       <p>마이 페이지입니다.</p>
 
-      <Link href="my/memo/create">
-        <PostButton>메모 등록하기</PostButton>
-      </Link>
+      {status === 'authenticated' && (
+        <>
+          <Link href="my/memo/create">
+            <PostButton>메모 등록하기</PostButton>
+          </Link>
 
-      <MemoList />
+          <MemoList />
+        </>
+      )}
     </>
   );
 }
