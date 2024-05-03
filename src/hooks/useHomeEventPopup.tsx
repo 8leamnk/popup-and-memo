@@ -22,8 +22,6 @@ function useHomeEventPopup(isComebackHome: boolean) {
     try {
       const { data } = await axios.get('/api/popup');
 
-      // console.log('data', data);
-
       if (data.status === 200) {
         setPopupData(data.data);
         setIsretry(false);

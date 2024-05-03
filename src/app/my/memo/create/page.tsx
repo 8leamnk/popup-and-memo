@@ -3,6 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { useAppDispatch } from '@/provider/hooks';
 import { getPopupInfo } from '@/slices/popupSlice';
@@ -28,6 +29,7 @@ const BackButton = styled(Button)`
 `;
 
 function CreateMemo() {
+  const { data: session } = useSession();
   const dispatch = useAppDispatch();
   const { input, onChangeInput, resetInput } = useInput();
   const { textarea, onChangeTextarea, resetTextarea } = useTextarea();
@@ -46,7 +48,8 @@ function CreateMemo() {
 
       const response = await axios.post('/api/memo', {
         title: input,
-        content: textarea,
+        content: textarea.replaceAll('<br>', '\n'),
+        email: session?.user?.email,
       });
 
       resetInput();
