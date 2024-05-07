@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
+    '@storybook/addon-themes'
   ],
   // 프레임워크 종류
   framework: {
