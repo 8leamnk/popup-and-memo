@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
 const S = {
-  Button: styled.button`
+  Button: styled.button<{ $isPrimary: boolean }>`
     height: 48px;
     border-radius: 6px;
     outline: none;
+    background-color: ${({ $isPrimary, theme }) =>
+      $isPrimary ? theme.colors.primary : theme.colors.white};
     cursor: pointer;
 
     &:active {
@@ -14,12 +16,17 @@ const S = {
 };
 
 interface ButtonProps {
+  isPrimary: boolean;
   children: string;
   onClick?: (() => void) | ((e: React.FormEvent) => Promise<void>);
 }
 
-function Button({ children, ...rest }: ButtonProps) {
-  return <S.Button {...rest}>{children}</S.Button>;
+function Button({ isPrimary, children, ...rest }: ButtonProps) {
+  return (
+    <S.Button $isPrimary={isPrimary} {...rest}>
+      {children}
+    </S.Button>
+  );
 }
 
 export default Button;
