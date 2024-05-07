@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { ThemeProvider } from 'styled-components';
-import lightTheme from '@/style/Theme/lightTheme';
 import Button from '@/components/Atoms/Button';
-import React from 'react';
 
 // 메타 데이터, 제네릭에 Button 컴포넌트의 타입을 넘겨준다.
 const meta = {
@@ -34,31 +31,25 @@ type StoryType = StoryObj<typeof meta>;
 export const Primary: StoryType = {
   // 컴포넌트에 필요한 arguments, 리액트 컴포넌트에게는 Props
   args: {
-    isPrimary: true,
+    type: 'primary',
     children: 'Primary',
     onClick: fn(),
   },
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={lightTheme}>
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
+  // 스토리를 감싸는 UI 또는 래퍼 컴포넌트가 필요할 때
+  // decorators: [
+  //   (Story) => (
+  //     <ThemeProvider theme={lightTheme}>
+  //       <Story />
+  //     </ThemeProvider>
+  //   ),
+  // ],
 };
 
 // 또 하나의 스토리
-export const Secondary: StoryType = {
+export const Small: StoryType = {
   args: {
-    isPrimary: false,
-    children: 'Secondary',
+    size: 'small',
+    children: 'Small',
     onClick: fn(),
   },
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={lightTheme}>
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
 };

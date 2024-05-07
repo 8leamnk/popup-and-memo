@@ -13,7 +13,6 @@ const S = {
   `,
 
   Button: styled(Button)`
-    height: 32px;
     background-color: ${({ theme }) => theme.colors.honeyPeach};
   `,
 };
@@ -25,13 +24,19 @@ function LoginOrLogout() {
     return (
       <S.Wrapper>
         <WelcomeUser />
-        <S.Button onClick={() => signOut()}>로그아웃</S.Button>
+        <S.Button type="small" onClick={() => signOut()}>
+          로그아웃
+        </S.Button>
       </S.Wrapper>
     );
   }
 
   if (status === 'unauthenticated') {
-    return <S.Button onClick={() => signIn()}>로그인</S.Button>;
+    return (
+      <S.Button type="small" onClick={() => signIn()}>
+        로그인
+      </S.Button>
+    );
   }
 
   return <></>;
