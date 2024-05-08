@@ -52,3 +52,9 @@ export interface MemoType {
   content: string;
   createdAt: string;
 }
+
+export interface PostMemoParams {
+  input: string;
+  textarea: string;
+  email: string;
+}
