@@ -24,7 +24,7 @@ function LoginOrLogout() {
     return (
       <S.Wrapper>
         <WelcomeUser />
-        <S.Button type="small" onClick={() => signOut()}>
+        <S.Button size="small" onClick={() => signOut()}>
           로그아웃
         </S.Button>
       </S.Wrapper>
@@ -33,7 +33,7 @@ function LoginOrLogout() {
 
   if (status === 'unauthenticated') {
     return (
-      <S.Button type="small" onClick={() => signIn()}>
+      <S.Button size="small" onClick={() => signIn()}>
         로그인
       </S.Button>
     );
