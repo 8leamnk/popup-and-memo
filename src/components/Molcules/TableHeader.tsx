@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import TableSpace from '../Atoms/TableSpace';
+import { TableHeaderInfo } from '@/constants/types';
 
 const S = {
   TableHeader: styled.li`
@@ -10,15 +11,8 @@ const S = {
   `,
 };
 
-interface HeaderInfo {
-  id: number;
-  children: React.ReactNode;
-  width: string;
-  flex: string;
-}
-
 interface TableHeaderProps {
-  headerInfo: HeaderInfo[];
+  headerInfo: TableHeaderInfo[];
 }
 
 function TableHeader({ headerInfo }: TableHeaderProps) {

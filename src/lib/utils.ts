@@ -1,8 +1,6 @@
-interface Data {
-  id: number;
-}
+import { DataType } from '@/constants/types';
 
-export function bubbleSort<T extends Data>(arr: T[]) {
+export function bubbleSort<T extends DataType>(arr: T[]) {
   const result = [...arr];
 
   for (let i = result.length; i > 0; i -= 1) {

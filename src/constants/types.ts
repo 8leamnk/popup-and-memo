@@ -1,3 +1,7 @@
+export interface DataType {
+  id: number;
+}
+
 type pathnameType = string | undefined;
 
 export interface HistoryInfo {
@@ -57,4 +61,20 @@ export interface PostMemoParams {
   input: string;
   textarea: string;
   email: string;
+}
+
+export interface TableHeaderInfo {
+  id: number;
+  children: React.ReactNode;
+  width: string;
+  flex: string;
+}
+
+export interface TableBodyInfo {
+  id: number;
+  children: React.ReactNode;
+  width: string;
+  flex: string;
+  description: string;
+  fontWeight: string;
 }
