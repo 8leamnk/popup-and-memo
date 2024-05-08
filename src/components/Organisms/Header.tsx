@@ -1,5 +1,6 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import Navigation from '../Molcules/Navigation';
 import PageLink from '../Atoms/PageLink';
@@ -29,12 +30,18 @@ const PAGES: PageInfo[] = [
 ];
 
 function Header() {
+  const { status } = useSession();
+
   return (
     <Wrapper>
       <Navigation>
-        {PAGES.map((page) => (
-          <PageLink key={page.href} pageInfo={page} />
-        ))}
+        {PAGES.map((page) => {
+          if (page.name === 'MY' && status !== 'authenticated') {
+            return <></>;
+          }
+
+          return <PageLink key={page.href} pageInfo={page} />;
+        })}
       </Navigation>
 
       <LoginOrLogout />

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import Button from '@/components/Atoms/Button';
-import MemoList from '@/components/Organisms/MemoList';
+import MemoListTemplate from '@/components/Templates/MemoListTemplate';
 
 const PostButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.blazingOrange};
@@ -14,21 +14,25 @@ const PostButton = styled(Button)`
 function MyPage() {
   const { status } = useSession();
 
-  return (
-    <>
-      <p>마이 페이지입니다.</p>
+  if (status === 'authenticated') {
+    return (
+      <>
+        <p>마이 페이지입니다.</p>
 
-      {status === 'authenticated' && (
-        <>
-          <Link href="my/memo/create">
-            <PostButton>메모 등록하기</PostButton>
-          </Link>
+        <Link href="my/memo/create">
+          <PostButton>메모 등록하기</PostButton>
+        </Link>
 
-          <MemoList />
-        </>
-      )}
-    </>
-  );
+        <MemoListTemplate />
+      </>
+    );
+  }
+
+  if (status === 'unauthenticated') {
+    return <p>로그인된 사용자에게만 이용이 가능합니다.</p>;
+  }
+
+  return <></>;
 }
 
 export default MyPage;
