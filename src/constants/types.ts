@@ -63,6 +63,12 @@ export interface PostMemoParams {
   email: string;
 }
 
+export interface TableListInfo {
+  id: number;
+  title: string;
+  createdAt?: string;
+}
+
 export interface TableHeaderInfo {
   id: number;
   children: React.ReactNode;

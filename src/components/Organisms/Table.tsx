@@ -3,13 +3,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import TableBody from '../Molcules/TableBody';
-import { DataType, TableBodyInfo, TableHeaderInfo } from '@/constants/types';
+import {
+  TableBodyInfo,
+  TableHeaderInfo,
+  TableListInfo,
+} from '@/constants/types';
 import TableHeader from '../Molcules/TableHeader';
 
 const Wrapper = styled.ul<{
   $width: string;
 }>`
-  width: 100%;
+  width: ${({ $width }) => $width};
   border: ${({ theme }) => `1px solid ${theme.colors.pristine}`};
   box-sizing: border-box;
   padding: 0;
@@ -22,7 +26,7 @@ interface TableProps<TableListType> {
   getBodyInfo: (list: TableListType, index: number) => TableBodyInfo[];
 }
 
-function Table<TableListType extends DataType>({
+function Table<TableListType extends TableListInfo>({
   width,
   tableLists,
   headerInfo,
