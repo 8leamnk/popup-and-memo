@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { bubbleSort } from '@/lib/utils';
 
 const prisma = new PrismaClient();
 
@@ -16,9 +17,8 @@ export async function GET(request: Request) {
       result = { ...response, id: Number(response?.id) };
     } else {
       const response = await prisma.memo.findMany({ where: { email } });
-      result = response.map((item) => {
-        return { ...item, id: Number(item?.id) };
-      });
+      const data = response.map((item) => ({ ...item, id: Number(item?.id) }));
+      result = bubbleSort(data);
     }
 
     return Response.json({ data: result });
