@@ -5,8 +5,8 @@ import useComeBack from '../useComeBack';
 
 const mockUseAppSelector = jest.fn();
 
-jest.mock('react-redux', () => ({
-  useSelector() {
+jest.mock('@/provider/hooks', () => ({
+  useAppSelector() {
     return mockUseAppSelector();
   },
 }));
