@@ -9,7 +9,6 @@ const S = {
 
   LabelText: styled.h2`
     font-size: ${({ theme }) => `${theme.fontSize.base}px`};
-    margin: 0;
   `,
 };
 

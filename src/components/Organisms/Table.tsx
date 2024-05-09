@@ -16,7 +16,6 @@ const Wrapper = styled.ul<{
   width: ${({ $width }) => $width};
   border: ${({ theme }) => `1px solid ${theme.colors.pristine}`};
   box-sizing: border-box;
-  padding: 0;
 `;
 
 interface TableProps<TableListType> {

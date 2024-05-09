@@ -8,7 +8,7 @@ import MemoListTemplate from '@/components/Templates/MemoListTemplate';
 
 const PostButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.blazingOrange};
-  margin-top: 24px;
+  margin: 24px 0 8px;
 `;
 
 function MyPage() {

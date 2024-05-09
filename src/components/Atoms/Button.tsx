@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const S = {
   Button: styled.button<{ $type: string; $size: string }>`
     height: ${({ $size }) => ($size === 'small' ? '32px' : '48px')};
+    padding: 0 8px;
     border-radius: 6px;
     outline: none;
     background-color: ${({ $type, theme }) => {
