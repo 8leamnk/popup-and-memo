@@ -2,6 +2,7 @@
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import styled from 'styled-components';
+import { CHECK_AUTH_MESSAGE } from '@/constants/message';
 import Button from '../Atoms/Button';
 import WelcomeUser from '../Atoms/WelcomeUser';
 
@@ -39,7 +40,7 @@ function LoginOrLogout() {
     );
   }
 
-  return <></>;
+  return <>{CHECK_AUTH_MESSAGE}</>;
 }
 
 export default LoginOrLogout;
