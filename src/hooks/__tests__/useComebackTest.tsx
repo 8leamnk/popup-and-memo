@@ -17,22 +17,10 @@ describe('useComeBack 테스트', () => {
     const TARGET_PATHNAME = '/';
     const FALSE = false;
     const TRUE = true;
-    const HISTORY_FIRST = {
-      currPathname: '/',
-      prevPathname: undefined,
-    };
-    const HISTORY_SECOND = {
-      currPathname: '/about',
-      prevPathname: '/',
-    };
-    const HISTORY_THIRD = {
-      currPathname: '/my',
-      prevPathname: '/about',
-    };
-    const HISTORY_4TH = {
-      currPathname: '/',
-      prevPathname: '/my',
-    };
+    const HISTORY_FIRST = { currPathname: '/', prevPathname: undefined };
+    const HISTORY_SECOND = { currPathname: '/about', prevPathname: '/' };
+    const HISTORY_THIRD = { currPathname: '/my', prevPathname: '/about' };
+    const HISTORY_4TH = { currPathname: '/', prevPathname: '/my' };
 
     // when
     mockUseAppSelector.mockImplementation(() => ({
