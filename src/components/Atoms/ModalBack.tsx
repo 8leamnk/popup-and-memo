@@ -8,15 +8,20 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1;
 `;
 
-function ModalBack({ children }: { children: React.ReactNode }) {
-  return <Wrapper>{children}</Wrapper>;
+interface ModalBackProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+
+function ModalBack({ children, onClick }: ModalBackProps) {
+  return <Wrapper onClick={onClick}>{children}</Wrapper>;
 }
 
 export default ModalBack;
