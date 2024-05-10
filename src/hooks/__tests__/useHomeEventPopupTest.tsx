@@ -1,8 +1,8 @@
 'use client';
 
 import { act, renderHook, waitFor } from '@testing-library/react';
-import useHomeEventPopup from '../useHomeEventPopup';
 import axios from 'axios';
+import useHomeEventPopup from '../useHomeEventPopup';
 
 const mockDispatch = jest.fn();
 const TIMEOUT = 20;
