@@ -2,29 +2,29 @@ import { renderHook } from '@testing-library/react';
 import useValidationString from '../useValidationString';
 
 describe('문자열 유효성 검사', () => {
-  test('아무 것도 입력하지 않으면 예외가 발생한다.', () => {
+  test('빈 문자열이 있으면 예외가 발생한다.', () => {
     // given
-    const INPUT = '';
+    const INPUTS = ['검사 중', '룰루', ''];
 
     // when
     const { result } = renderHook(useValidationString);
 
     // then
     expect(() => {
-      result.current.validateEmpty(INPUT);
+      result.current.validateEmpty(INPUTS);
     }).toThrow();
   });
 
-  test('문자열의 길이가 1 이상이면 예외가 발생하지 않는다.', () => {
+  test('빈 문자열이 없으면 예외가 발생하지 않는다.', () => {
     // given
-    const INPUT = '메모';
+    const INPUTS = ['메모 내용', '가나다라', '안녕하세요', '제목'];
 
     // when
     const { result } = renderHook(useValidationString);
 
     // then
     expect(() => {
-      result.current.validateEmpty(INPUT);
+      result.current.validateEmpty(INPUTS);
     }).not.toThrow();
   });
 });
