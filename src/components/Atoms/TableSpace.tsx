@@ -1,6 +1,5 @@
-'use client';
-
 import styled from 'styled-components';
+import { ChildrenType } from '@/constants/types';
 
 const Space = styled.div<{
   $width: string;
@@ -16,11 +15,10 @@ const Space = styled.div<{
   text-align: ${({ $flex }) => ($flex === 'none' ? 'center' : 'left')};
 `;
 
-interface TableBodyProps {
+interface TableBodyProps extends ChildrenType {
   width: string;
   fontWeight: string;
   flex: string;
-  children: React.ReactNode;
 }
 
 function TableSpace({

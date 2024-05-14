@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ChildrenType } from '@/constants/types';
 
 const Wrapper = styled.nav`
   display: flex;
@@ -7,7 +8,7 @@ const Wrapper = styled.nav`
   gap: 16px;
 `;
 
-function Navigation({ children }: { children: React.ReactNode }) {
+function Navigation({ children }: ChildrenType) {
   return <Wrapper>{children}</Wrapper>;
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
+import { ChildrenType } from '@/constants/types';
 
-interface FormProps {
-  children: React.ReactNode;
+interface FormProps extends ChildrenType {
   onSubmit: (e: React.FocusEvent<HTMLFormElement>) => void;
 }
 

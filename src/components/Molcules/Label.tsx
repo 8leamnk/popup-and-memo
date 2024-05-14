@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ChildrenType } from '@/constants/types';
 
 const S = {
   Label: styled.label`
@@ -12,13 +13,11 @@ const S = {
   `,
 };
 
-function Label({
-  labelText,
-  children,
-}: {
+interface LabelProps extends ChildrenType {
   labelText: string;
-  children: React.ReactNode;
-}) {
+}
+
+function Label({ labelText, children }: LabelProps) {
   return (
     <S.Label>
       <S.LabelText>{labelText}</S.LabelText>
