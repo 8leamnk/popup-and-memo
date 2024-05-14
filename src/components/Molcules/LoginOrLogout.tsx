@@ -2,7 +2,6 @@
 
 import { signIn, signOut, useSession } from 'next-auth/react';
 import styled from 'styled-components';
-import { CHECK_AUTH_MESSAGE } from '@/constants/message';
 import Button from '../Atoms/Button';
 import WelcomeUser from '../Atoms/WelcomeUser';
 
@@ -11,10 +10,6 @@ const S = {
     display: flex;
     align-items: center;
     gap: 8px;
-  `,
-
-  Button: styled(Button)`
-    background-color: ${({ theme }) => theme.colors.honeyPeach};
   `,
 };
 
@@ -25,22 +20,22 @@ function LoginOrLogout() {
     return (
       <S.Wrapper>
         <WelcomeUser />
-        <S.Button size="small" onClick={() => signOut()}>
+        <Button length="fit" size="small" onClick={() => signOut()}>
           로그아웃
-        </S.Button>
+        </Button>
       </S.Wrapper>
     );
   }
 
   if (status === 'unauthenticated') {
     return (
-      <S.Button size="small" onClick={() => signIn()}>
+      <Button length="fit" size="small" onClick={() => signIn()}>
         로그인
-      </S.Button>
+      </Button>
     );
   }
 
-  return <>{CHECK_AUTH_MESSAGE}</>;
+  return <></>;
 }
 
 export default LoginOrLogout;
