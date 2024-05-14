@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import styled from 'styled-components';
 import TableBody from '../Molcules/TableBody';
@@ -20,15 +18,15 @@ const Wrapper = styled.ul<{
 
 interface TableProps<TableListType> {
   width: string;
-  tableLists: TableListType[];
   headerInfo: TableHeaderInfo[];
+  tableLists: TableListType[];
   getBodyInfo: (list: TableListType, index: number) => TableBodyInfo[];
 }
 
 function Table<TableListType extends TableListInfo>({
   width,
-  tableLists,
   headerInfo,
+  tableLists,
   getBodyInfo,
 }: TableProps<TableListType>) {
   return (
