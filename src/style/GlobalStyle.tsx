@@ -19,12 +19,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  h1 {
-    font-size: ${({ theme }) => `${theme.fontSize.xLarge}px`};
-    margin: 0;
-  }
-  
-  p {
+  h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 `;
