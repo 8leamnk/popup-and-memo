@@ -10,7 +10,7 @@ const meta = {
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'centered',
+    layout: 'fullscreen',
   },
   // 컴포넌트에 대한 문서를 자동으로 생성
   tags: ['autodocs'],
@@ -50,6 +50,38 @@ export const Small: StoryType = {
   args: {
     size: 'small',
     children: 'Small',
+    onClick: fn(),
+  },
+};
+
+export const Submit: StoryType = {
+  args: {
+    type: 'submit',
+    children: 'SUBMIT',
+    onClick: fn(),
+  },
+};
+
+export const Back: StoryType = {
+  args: {
+    type: 'back',
+    children: 'BACK',
+    onClick: fn(),
+  },
+};
+
+export const Long: StoryType = {
+  args: {
+    length: 'long',
+    children: 'LONG',
+    onClick: fn(),
+  },
+};
+
+export const Fit: StoryType = {
+  args: {
+    length: 'fit',
+    children: 'FIT',
     onClick: fn(),
   },
 };
