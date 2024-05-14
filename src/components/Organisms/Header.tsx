@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import { PageInfo } from '@/constants/types';
-import { CHECK_AUTH_MESSAGE } from '@/constants/message';
 import Navigation from '../Molcules/Navigation';
 import PageLink from '../Atoms/PageLink';
 import LoginOrLogout from '../Molcules/LoginOrLogout';
@@ -37,14 +36,8 @@ function Header() {
     <Wrapper>
       <Navigation>
         {PAGES.map((page) => {
-          if (page.name === 'MY') {
-            if (status === 'unauthenticated') {
-              return '';
-            }
-
-            if (status === 'loading') {
-              return CHECK_AUTH_MESSAGE;
-            }
+          if (page.name === 'MY' && status !== 'authenticated') {
+            return '';
           }
 
           return <PageLink key={page.href} pageInfo={page} />;

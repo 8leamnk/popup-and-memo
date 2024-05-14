@@ -5,8 +5,9 @@ import StyledComponentsRegistry from '@/lib/registry';
 import Theme from '@/style/Theme';
 import History from '@/components/Atoms/History';
 import Header from '@/components/Organisms/Header';
-import Popup from '@/components/Organisms/Popup';
 import Main from '@/components/Molcules/Main';
+import LoginJudgment from '@/components/Features/LoginJudgment';
+import Popup from '@/components/Organisms/Popup';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -28,6 +29,7 @@ function RootLayout({
                 <History />
                 <Header />
                 <Main>{children}</Main>
+                <LoginJudgment />
                 <Popup />
               </Theme>
             </StyledComponentsRegistry>
