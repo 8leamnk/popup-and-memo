@@ -1,9 +1,9 @@
-'use client';
+import Content from '@/components/Atoms/Content';
 
 function App() {
   return (
     <>
-      <h1>홈</h1>
+      <Content>홈</Content>
     </>
   );
 }

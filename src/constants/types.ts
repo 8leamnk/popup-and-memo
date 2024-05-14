@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface DataType {
   id: number;
 }
@@ -83,4 +85,8 @@ export interface TableBodyInfo {
   flex: string;
   description: string;
   fontWeight: string;
+}
+
+export interface ChildrenType {
+  children: React.ReactNode;
 }
