@@ -1,7 +1,7 @@
-import CreateMemoTemplate from '@/components/Templates/CreateMemoTemplate';
+import CreateMemoFeature from '@/components/Features/CreateMemoFeature';
 
 function CreateMemoPage() {
-  return <CreateMemoTemplate />;
+  return <CreateMemoFeature />;
 }
 
 export default CreateMemoPage;

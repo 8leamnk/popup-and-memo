@@ -1,9 +1,11 @@
 'use client';
 
 function useValidationString() {
-  const validateEmpty = (input: string) => {
-    if (input.length === 0) {
-      throw new Error();
+  const validateEmpty = (inputs: string[]) => {
+    for (let index = 0; index < inputs.length; index += 1) {
+      if (inputs[index].length === 0) {
+        throw new Error();
+      }
     }
   };
 
