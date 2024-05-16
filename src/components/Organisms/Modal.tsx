@@ -4,7 +4,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { ChildrenType, ModalTheme } from '@/constants/types';
 import ModalBack from '../Atoms/ModalBack';
-import Title from '../Atoms/Title';
 import Content from '../Atoms/Content';
 
 const Inner = styled.div`
