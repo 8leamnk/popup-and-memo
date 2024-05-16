@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { CHECK_AUTH_MESSAGE } from '@/constants/message';
-import Modal from '../Organisms/Modal';
+import Modal from './Modal';
 
 function LoginCheck() {
   const { status } = useSession();

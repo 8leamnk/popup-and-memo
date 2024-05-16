@@ -3,10 +3,10 @@ import AuthProvider from '@/provider/AuthProvider';
 import ReduxProvider from '@/provider/ReduxProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import Theme from '@/style/Theme';
-import History from '@/components/Features/History';
+import History from '@/components/Organisms/History';
 import Header from '@/components/Organisms/Header';
 import Main from '@/components/Molcules/Main';
-import LoginCheck from '@/components/Features/LoginCheck';
+import LoginCheck from '@/components/Organisms/LoginCheck';
 import Popup from '@/components/Organisms/Popup';
 
 export const metadata: Metadata = {
