@@ -3,13 +3,13 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import Button from '../Atoms/Button';
-import WelcomeUser from '../Atoms/WelcomeUser';
+import Profile from '../Molcules/Profile';
 
 const S = {
   Wrapper: styled.div`
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
   `,
 };
 
@@ -19,7 +19,7 @@ function LoginOrLogout() {
   if (status === 'authenticated') {
     return (
       <S.Wrapper>
-        <WelcomeUser />
+        <Profile />
         <Button length="fit" size="small" onClick={() => signOut()}>
           로그아웃
         </Button>
