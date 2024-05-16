@@ -14,12 +14,10 @@ const S = {
     width: 720px;
   `,
 
-  PostButton: styled(Button)`
-    margin-right: 8px;
-  `,
-
-  BackButton: styled(Button)`
-    margin-bottom: 16px;
+  Decision: styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
   `,
 };
 
@@ -59,13 +57,15 @@ function CreateMemo({
           />
         </Label>
 
-        <S.PostButton type="submit" onClick={onSubmit}>
-          메모 등록하기
-        </S.PostButton>
+        <S.Decision>
+          <Button type="submit" onClick={onSubmit}>
+            메모 등록하기
+          </Button>
 
-        <Link href="/my">
-          <S.BackButton type="back">목록으로</S.BackButton>
-        </Link>
+          <Link href="/my">
+            <Button type="back">목록으로</Button>
+          </Link>
+        </S.Decision>
       </Form>
     </S.CreateMemo>
   );
