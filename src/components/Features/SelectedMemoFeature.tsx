@@ -28,6 +28,7 @@ function SelectedMemoFeature() {
     if (status === 'authenticated') {
       getMemo();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   if (memo) {

@@ -18,6 +18,7 @@ function useComeBack(targetPathname: string): boolean {
     const isComebackTargetPathname = catchComeBack(historyInfo);
 
     setIsComeback(isComebackTargetPathname);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [historyInfo]);
 
   return isComeback;

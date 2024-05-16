@@ -29,6 +29,7 @@ function MemoListFeature() {
 
   useEffect(() => {
     getMemoList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const headerInfo = [

@@ -46,6 +46,7 @@ function useHomeEventPopup(isComebackHome: boolean) {
     ) {
       dispatch(handleHomeEventPopupIndex());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComebackHome]);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ function useHomeEventPopup(isComebackHome: boolean) {
     } else if (!!popupData[homeEventPopupIndex]) {
       openPopup(popupData[homeEventPopupIndex]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homeEventPopupIndex]);
 
   useEffect(() => {

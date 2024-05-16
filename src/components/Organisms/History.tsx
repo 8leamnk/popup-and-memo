@@ -20,6 +20,7 @@ function History() {
 
       dispatch(handleAddHistoryInfo(newHistoryInfo));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return <></>;
