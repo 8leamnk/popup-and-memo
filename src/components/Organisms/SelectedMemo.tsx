@@ -6,8 +6,8 @@ import { MemoType } from '@/constants/types';
 
 const MemoInfo = styled.div`
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 16px;
 `;
 
@@ -20,7 +20,10 @@ function SelectedMemo({ memo }: SelectedMemoProps) {
     <>
       <MemoInfo>
         <Title>{memo.title}</Title>
-        <Date>{memo.createdAt.split('T')[0]}</Date>
+        <Content>
+          {`등록일: `}
+          <Date>{memo.createdAt.split('T')[0]}</Date>
+        </Content>
       </MemoInfo>
 
       {memo.content.split(/\n/).map((text, index) => (

@@ -9,17 +9,19 @@ import Input from '../Atoms/Input';
 import Textarea from '../Atoms/Textarea';
 import Button from '../Atoms/Button';
 
-const PostButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.littleBoyBlue};
-  color: ${({ theme }) => theme.colors.white};
-  margin-right: 8px;
-`;
+const S = {
+  CreateMemo: styled.section`
+    width: 720px;
+  `,
 
-const BackButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.pinkYarrow};
-  color: ${({ theme }) => theme.colors.white};
-  margin-bottom: 16px;
-`;
+  PostButton: styled(Button)`
+    margin-right: 8px;
+  `,
+
+  BackButton: styled(Button)`
+    margin-bottom: 16px;
+  `,
+};
 
 interface CreateMemoProps {
   input: string;
@@ -37,32 +39,35 @@ function CreateMemo({
   onSubmit,
 }: CreateMemoProps) {
   return (
-    <Form onSubmit={onSubmit}>
-      <Label labelText="제목">
-        <Input
-          value={input}
-          type="text"
-          placeholder="제목을 입력하세요."
-          onChange={onChangeInput}
-        />
-      </Label>
+    <S.CreateMemo>
+      <Form onSubmit={onSubmit}>
+        <Label labelText="제목">
+          <Input
+            autoFocus={true}
+            value={input}
+            type="text"
+            placeholder="제목을 입력하세요."
+            onChange={onChangeInput}
+          />
+        </Label>
 
-      <Label labelText="내용">
-        <Textarea
-          value={textarea}
-          placeholder="내용을 입력하세요."
-          rows={10}
-          cols={50}
-          onChange={onChangeTextarea}
-        />
-      </Label>
+        <Label labelText="내용">
+          <Textarea
+            value={textarea}
+            placeholder="내용을 입력하세요."
+            onChange={onChangeTextarea}
+          />
+        </Label>
 
-      <PostButton onClick={onSubmit}>메모 등록하기</PostButton>
+        <S.PostButton type="submit" onClick={onSubmit}>
+          메모 등록하기
+        </S.PostButton>
 
-      <Link href="/my">
-        <BackButton>목록으로</BackButton>
-      </Link>
-    </Form>
+        <Link href="/my">
+          <S.BackButton type="back">목록으로</S.BackButton>
+        </Link>
+      </Form>
+    </S.CreateMemo>
   );
 }
 

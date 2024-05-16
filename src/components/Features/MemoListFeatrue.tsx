@@ -70,7 +70,6 @@ function MemoListFeature() {
   if (memoList.length > 0) {
     return (
       <Table
-        width="720px"
         headerInfo={headerInfo}
         tableLists={memoList}
         getBodyInfo={getBodyInfo}
