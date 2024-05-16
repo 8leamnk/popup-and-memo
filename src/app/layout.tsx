@@ -3,10 +3,10 @@ import AuthProvider from '@/provider/AuthProvider';
 import ReduxProvider from '@/provider/ReduxProvider';
 import StyledComponentsRegistry from '@/lib/registry';
 import Theme from '@/style/Theme';
-import History from '@/components/Atoms/History';
+import History from '@/components/Features/History';
 import Header from '@/components/Organisms/Header';
 import Main from '@/components/Molcules/Main';
-import LoginJudgment from '@/components/Features/LoginJudgment';
+import LoginCheck from '@/components/Features/LoginCheck';
 import Popup from '@/components/Organisms/Popup';
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ function RootLayout({
                 <History />
                 <Header />
                 <Main>{children}</Main>
-                <LoginJudgment />
+                <LoginCheck />
                 <Popup />
               </Theme>
             </StyledComponentsRegistry>
