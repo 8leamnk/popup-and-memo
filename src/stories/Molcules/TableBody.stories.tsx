@@ -39,6 +39,19 @@ const meta = {
   parameters: { layout: 'centered' },
   tags: ['autodocs'],
   args: { bodyInfo },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          border: '1px solid #60c8b3',
+          borderRight: 'none',
+          borderBottom: 'none',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof TableBody>;
 
 export default meta;

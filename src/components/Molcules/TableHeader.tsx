@@ -7,7 +7,6 @@ import { TableHeaderInfo } from '@/constants/types';
 const S = {
   TableHeader: styled.li`
     display: flex;
-    background-color: ${({ theme }) => theme.colors.peachFuzz};
   `,
 };
 
@@ -25,6 +24,7 @@ function TableHeader({ headerInfo }: TableHeaderProps) {
             width={item.width}
             fontWeight="bold"
             flex={item.flex}
+            type="header"
           >
             {item.children}
           </TableSpace>

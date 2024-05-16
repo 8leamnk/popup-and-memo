@@ -12,19 +12,21 @@ const Wrapper = styled.ul<{
   $width: string;
 }>`
   width: ${({ $width }) => $width};
-  border: ${({ theme }) => `1px solid ${theme.colors.pristine}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
+  border-right: none;
+  border-bottom: none;
   box-sizing: border-box;
 `;
 
 interface TableProps<TableListType> {
-  width: string;
+  width?: string;
   headerInfo: TableHeaderInfo[];
   tableLists: TableListType[];
   getBodyInfo: (list: TableListType, index: number) => TableBodyInfo[];
 }
 
 function Table<TableListType extends TableListInfo>({
-  width,
+  width = '100%',
   headerInfo,
   tableLists,
   getBodyInfo,
