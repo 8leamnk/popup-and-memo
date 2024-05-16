@@ -30,13 +30,14 @@ describe('메모 등록 기능 테스트', () => {
   const SUCCESS = '등록 완료';
   const FAIL = '등록 실패';
 
+  mockUseSession.mockImplementation(() => ({ data: SESSION }));
+
   test('사용자 정보에 이메일이 있고, 입력창이 모두 비어있지 않으면 정상적으로 메모가 등록 된다.', async () => {
     // given
     const TITLE_INPUT = '메모1';
     const CONTENT_INPUT = '첫 번째 메모입니다.';
     const SUCCESS_MESSAGE = '정상적으로 등록되었습니다.';
 
-    mockUseSession.mockImplementation(() => ({ data: SESSION }));
     mockPostMemo.mockResolvedValue(SUCCESS_MESSAGE);
 
     const { getByText, getByLabelText } = render(
@@ -75,9 +76,6 @@ describe('메모 등록 기능 테스트', () => {
     const CONTENT_INPUT = '';
     const FAIL_MESSAGE =
       '비어 있는 입력창이 있거나 사용자 정보에 이메일이 없어서 등록을 하지 못했습니다.';
-
-    mockUseSession.mockImplementation(() => ({ data: SESSION }));
-
     const { getByText, getByLabelText } = render(
       <ReduxProvider>
         <StyledComponentsRegistry>
