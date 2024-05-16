@@ -6,9 +6,15 @@ import styled from 'styled-components';
 import Button from '@/components/Atoms/Button';
 import MemoListFeature from '@/components/Features/MemoListFeatrue';
 
-const PostButton = styled(Button)`
-  margin: 24px 0 8px;
-`;
+const S = {
+  Memo: styled.div`
+    width: 720px;
+    margin-top: 24px;
+  `,
+  PostButton: styled(Button)`
+    margin-bottom: 8px;
+  `,
+};
 
 function MyPage() {
   const { status } = useSession();
@@ -18,11 +24,13 @@ function MyPage() {
       <>
         <p>마이 페이지입니다.</p>
 
-        <Link href="my/memo/create">
-          <PostButton type="submit">메모 등록하기</PostButton>
-        </Link>
+        <S.Memo>
+          <Link href="my/memo/create">
+            <S.PostButton type="submit">메모 등록하기</S.PostButton>
+          </Link>
 
-        <MemoListFeature />
+          <MemoListFeature />
+        </S.Memo>
       </>
     );
   }
