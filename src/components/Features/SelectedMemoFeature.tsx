@@ -17,6 +17,9 @@ function SelectedMemoFeature() {
       const data = await fetchtMemo(params.id);
       setMemo(data);
     } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log('message', error.message);
+      }
       console.log('불러오기 중 오류가 발생했습니다.');
     }
   };
