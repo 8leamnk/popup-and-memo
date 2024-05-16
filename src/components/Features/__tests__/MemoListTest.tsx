@@ -2,11 +2,8 @@ import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import { MemoType } from '@/constants/types';
 import { LOADING_FEED_MEMO } from '@/constants/message';
-import ReduxProvider from '@/provider/ReduxProvider';
-import StyledComponentsRegistry from '@/lib/registry';
 import Theme from '@/style/Theme';
 import MemoListFeature from '../MemoListFeatrue';
-import Popup from '@/components/Organisms/Popup';
 
 interface MemoList extends MemoType {
   email: string;
@@ -50,14 +47,9 @@ describe('메모 불러오기 기능 테스트', () => {
     mockFetchMemoList.mockResolvedValue(MEMO_LIST);
 
     const { getByText, queryByText } = render(
-      <ReduxProvider>
-        <StyledComponentsRegistry>
-          <Theme>
-            <MemoListFeature />
-            <Popup />
-          </Theme>
-        </StyledComponentsRegistry>
-      </ReduxProvider>,
+      <Theme>
+        <MemoListFeature />
+      </Theme>,
     );
 
     // then
