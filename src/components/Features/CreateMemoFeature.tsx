@@ -9,7 +9,7 @@ import useValidationString from '@/hooks/useValidationString';
 import usePopup from '@/hooks/usePopup';
 import CreateMemo from '@/components/Organisms/CreateMemo';
 
-function CreateMemoTemplate() {
+function CreateMemoFeature() {
   const { data: session } = useSession();
   const { input, onChangeInput, resetInput } = useInput();
   const { textarea, onChangeTextarea, resetTextarea } = useTextarea();
@@ -43,4 +43,4 @@ function CreateMemoTemplate() {
   );
 }
 
-export default CreateMemoTemplate;
+export default CreateMemoFeature;
