@@ -10,7 +10,7 @@ const meta = {
   component: Button,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'fullscreen',
+    layout: 'centered',
   },
   // 컴포넌트에 대한 문서를 자동으로 생성
   tags: ['autodocs'],
@@ -19,6 +19,23 @@ const meta = {
     children: 'BUTTON',
     onClick: fn(),
   },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: '720px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#cacaca',
+          padding: '16px',
+          boxSizing: 'border-box',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -32,7 +49,7 @@ export const Primary: StoryType = {
   // 컴포넌트에 필요한 arguments, 리액트 컴포넌트에게는 Props
   args: {
     type: 'primary',
-    children: 'Primary',
+    children: 'BUTTON',
     onClick: fn(),
   },
   // 스토리를 감싸는 UI 또는 래퍼 컴포넌트가 필요할 때
@@ -46,10 +63,16 @@ export const Primary: StoryType = {
 };
 
 // 또 하나의 스토리
+export const Normal: StoryType = {
+  args: {
+    children: 'BUTTON',
+  },
+};
+
 export const Small: StoryType = {
   args: {
     size: 'small',
-    children: 'Small',
+    children: 'BUTTON',
     onClick: fn(),
   },
 };
@@ -57,7 +80,7 @@ export const Small: StoryType = {
 export const Submit: StoryType = {
   args: {
     type: 'submit',
-    children: 'SUBMIT',
+    children: 'BUTTON',
     onClick: fn(),
   },
 };
@@ -65,7 +88,15 @@ export const Submit: StoryType = {
 export const Back: StoryType = {
   args: {
     type: 'back',
-    children: 'BACK',
+    children: 'BUTTON',
+    onClick: fn(),
+  },
+};
+
+export const Close: StoryType = {
+  args: {
+    type: 'close',
+    children: 'BUTTON',
     onClick: fn(),
   },
 };
@@ -73,7 +104,7 @@ export const Back: StoryType = {
 export const Long: StoryType = {
   args: {
     length: 'long',
-    children: 'LONG',
+    children: 'BUTTON',
     onClick: fn(),
   },
 };
@@ -81,7 +112,7 @@ export const Long: StoryType = {
 export const Fit: StoryType = {
   args: {
     length: 'fit',
-    children: 'FIT',
+    children: 'BUTTON',
     onClick: fn(),
   },
 };
