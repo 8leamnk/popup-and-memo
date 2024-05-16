@@ -12,7 +12,7 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.secondary};
   padding: 24px;
   border-radius: 6px;
   box-shadow: 3px 6px 9px 0 rgba(0, 0, 0, 0.16);
@@ -29,8 +29,6 @@ function Modal({ modalOpened, modalTheme, children }: NoticeModalProps) {
     return (
       <ModalBack theme={modalTheme}>
         <Inner>
-          <Title>NOTICE</Title>
-
           <Content>{children}</Content>
         </Inner>
       </ModalBack>

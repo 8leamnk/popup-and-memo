@@ -20,17 +20,18 @@ const S = {
         case 'primary':
           return theme.colors.primary;
         case 'submit':
-          return theme.colors.littleBoyBlue;
+          return theme.colors.tertiary;
         case 'back':
-          return theme.colors.pinkYarrow;
+          return theme.colors.quaternary;
         case 'close':
           return theme.colors.pristine;
         default:
-          return theme.colors.honeyPeach;
+          return theme.colors.white;
       }
     }};
     color: ${({ $type, theme }) => {
       switch ($type) {
+        case 'primary':
         case 'submit':
         case 'back':
           return theme.colors.white;
@@ -38,8 +39,9 @@ const S = {
           return theme.colors.black;
       }
     }};
-    padding: 0 8px;
+    padding: 0 16px;
     border-radius: 6px;
+    border: none;
     outline: none;
     cursor: pointer;
 

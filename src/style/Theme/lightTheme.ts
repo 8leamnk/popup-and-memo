@@ -4,10 +4,10 @@ import FONT_SIZE from '../common/fontSize';
 
 const colors = {
   ...COLORS,
-  primary: COLORS.blazingOrange,
-  secondary: COLORS.bermuda,
-  tertiary: COLORS.pristine,
-  quaternary: COLORS.honeyPeach,
+  primary: COLORS.bermuda,
+  secondary: COLORS.blazingOrange,
+  tertiary: COLORS.littleBoyBlue,
+  quaternary: COLORS.auroraPink,
 };
 
 const lightTheme = {

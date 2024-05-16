@@ -16,7 +16,7 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.secondary};
   padding: 24px;
   border-radius: 6px;
   box-shadow: 3px 6px 9px 0 rgba(0, 0, 0, 0.16);

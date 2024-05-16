@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { PageInfo } from '@/constants/types';
 import Navigation from '../Molcules/Navigation';
 import PageLink from '../Atoms/PageLink';
-import LoginOrLogout from '../Molcules/LoginOrLogout';
+import LoginOrLogout from './LoginOrLogout';
 
 // style
 const Wrapper = styled.header`
@@ -14,8 +14,8 @@ const Wrapper = styled.header`
   align-items: center;
   width: 100%;
   height: ${({ theme }) => `${theme.fixedValues.headerHeight}px`};
-  padding: 16px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  padding: 0 16px;
+  background-color: ${({ theme }) => theme.colors.primary};
   position: fixed;
   top: 0;
   left: 0;
