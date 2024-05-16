@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ChildrenType } from '@/constants/types';
+import { ChildrenType, ModalTheme } from '@/constants/types';
 import React from 'react';
 
 const Wrapper = styled.section<{ $theme: string }>`
@@ -23,7 +23,7 @@ const Wrapper = styled.section<{ $theme: string }>`
 `;
 
 interface ModalBackProps extends ChildrenType {
-  theme?: 'light' | 'dark';
+  theme?: ModalTheme;
   onClick?: () => void;
 }
 

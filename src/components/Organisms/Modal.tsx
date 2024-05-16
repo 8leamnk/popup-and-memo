@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { ChildrenType } from '@/constants/types';
+import { ChildrenType, ModalTheme } from '@/constants/types';
 import ModalBack from '../Atoms/ModalBack';
 import Title from '../Atoms/Title';
 import Content from '../Atoms/Content';
@@ -21,12 +21,13 @@ const Inner = styled.div`
 
 interface NoticeModalProps extends ChildrenType {
   modalOpened: boolean;
+  modalTheme?: ModalTheme;
 }
 
-function Modal({ modalOpened, children }: NoticeModalProps) {
+function Modal({ modalOpened, modalTheme, children }: NoticeModalProps) {
   if (modalOpened) {
     return (
-      <ModalBack>
+      <ModalBack theme={modalTheme}>
         <Inner>
           <Title>NOTICE</Title>
 

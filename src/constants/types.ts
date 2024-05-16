@@ -90,3 +90,5 @@ export interface TableBodyInfo {
 export interface ChildrenType {
   children: React.ReactNode;
 }
+
+export type ModalTheme = 'light' | 'dark';
