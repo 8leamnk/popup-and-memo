@@ -1,12 +1,11 @@
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Popup Implementation Walkthrough',
-};
+import Content from '@/components/Atoms/Content';
 
 function App() {
-  return '홈';
+  return (
+    <>
+      <Content>홈</Content>
+    </>
+  );
 }
 
 export default App;

@@ -1,16 +1,21 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
+import { PageInfo } from '@/constants/types';
 import Navigation from '../Molcules/Navigation';
 import PageLink from '../Atoms/PageLink';
-import { PageInfo } from '@/constants/types';
+import LoginOrLogout from './LoginOrLogout';
 
 // style
 const Wrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: ${({ theme }) => `${theme.fixedValues.headerHeight}px`};
-  padding: 16px;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  padding: 0 16px;
+  background-color: ${({ theme }) => theme.colors.primary};
   position: fixed;
   top: 0;
   left: 0;
@@ -25,13 +30,21 @@ const PAGES: PageInfo[] = [
 ];
 
 function Header() {
+  const { status } = useSession();
+
   return (
     <Wrapper>
       <Navigation>
-        {PAGES.map((page) => (
-          <PageLink key={page.href} pageInfo={page} />
-        ))}
+        {PAGES.map((page) => {
+          if (page.name === 'MY' && status !== 'authenticated') {
+            return '';
+          }
+
+          return <PageLink key={page.href} pageInfo={page} />;
+        })}
       </Navigation>
+
+      <LoginOrLogout />
     </Wrapper>
   );
 }

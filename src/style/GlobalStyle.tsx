@@ -10,9 +10,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors.black};
     font-size: ${({ theme }) => `${theme.fontSize.base}px`};
     box-sizing: border-box;
-  }
-
-  body {
     padding: 0;
     margin: 0;
   }
@@ -22,12 +19,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
-  h1 {
-    font-size: ${({ theme }) => `${theme.fontSize.xLarge}px`};
-    margin: 0;
-  }
-  
-  p {
+  h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 `;

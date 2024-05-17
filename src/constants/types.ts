@@ -1,3 +1,19 @@
+import React from 'react';
+
+declare module 'next-auth' {
+  interface Response {
+    name: string;
+  }
+
+  interface Profile {
+    response: Response;
+  }
+}
+
+export interface DataType {
+  id: number;
+}
+
 type pathnameType = string | undefined;
 
 export interface HistoryInfo {
@@ -52,3 +68,37 @@ export interface MemoType {
   content: string;
   createdAt: string;
 }
+
+export interface PostMemoParams {
+  input: string;
+  textarea: string;
+  email: string;
+}
+
+export interface TableListInfo {
+  id: number;
+  title: string;
+  createdAt?: string;
+}
+
+export interface TableHeaderInfo {
+  id: number;
+  children: React.ReactNode;
+  width: string;
+  flex: string;
+}
+
+export interface TableBodyInfo {
+  id: number;
+  children: React.ReactNode;
+  width: string;
+  flex: string;
+  description: string;
+  fontWeight: string;
+}
+
+export interface ChildrenType {
+  children: React.ReactNode;
+}
+
+export type ModalTheme = 'light' | 'dark';

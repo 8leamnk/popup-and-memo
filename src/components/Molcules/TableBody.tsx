@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TableSpace from '../Atoms/TableSpace';
+import { TableBodyInfo } from '@/constants/types';
 
 const S = {
   TableBody: styled.li`
@@ -10,17 +11,8 @@ const S = {
   `,
 };
 
-interface BodyInfo {
-  id: number;
-  description: string;
-  children: React.ReactNode;
-  fontWeight: string;
-  width: string;
-  flex: string;
-}
-
 interface TableBodyProps {
-  bodyInfo: BodyInfo[];
+  bodyInfo: TableBodyInfo[];
 }
 
 function TableBody({ bodyInfo }: TableBodyProps) {

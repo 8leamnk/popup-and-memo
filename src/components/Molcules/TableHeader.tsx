@@ -2,23 +2,16 @@
 
 import styled from 'styled-components';
 import TableSpace from '../Atoms/TableSpace';
+import { TableHeaderInfo } from '@/constants/types';
 
 const S = {
   TableHeader: styled.li`
     display: flex;
-    background-color: ${({ theme }) => theme.colors.peachFuzz};
   `,
 };
 
-interface HeaderInfo {
-  id: number;
-  children: React.ReactNode;
-  width: string;
-  flex: string;
-}
-
 interface TableHeaderProps {
-  headerInfo: HeaderInfo[];
+  headerInfo: TableHeaderInfo[];
 }
 
 function TableHeader({ headerInfo }: TableHeaderProps) {
@@ -31,6 +24,7 @@ function TableHeader({ headerInfo }: TableHeaderProps) {
             width={item.width}
             fontWeight="bold"
             flex={item.flex}
+            type="header"
           >
             {item.children}
           </TableSpace>

@@ -8,6 +8,16 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["import", "prettier", "react", "react-hooks"]
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:storybook/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "import",
+    "prettier",
+    "react",
+    "react-hooks"
+  ]
 }

@@ -1,10 +1,10 @@
 'use client';
 
+import { useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { PageInfo } from '@/constants/types';
-import { useMemo } from 'react';
 
 const Page = styled(Link)<{ $isActive: boolean }>`
   display: block;
@@ -22,7 +22,7 @@ function PageLink({ pageInfo, ...rest }: { pageInfo: PageInfo }) {
     }
 
     return pathname.includes(pageInfo.href);
-  }, [pageInfo]);
+  }, [pathname, pageInfo]);
 
   return (
     <Page href={pageInfo.href} $isActive={isActive} {...rest}>

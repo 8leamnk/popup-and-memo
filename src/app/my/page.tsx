@@ -1,27 +1,41 @@
 'use client';
 
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 import Button from '@/components/Atoms/Button';
-import MemoList from '@/components/Organisms/MemoList';
+import MemoListFeature from '@/components/Features/MemoListFeatrue';
 
-const PostButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.blazingOrange};
-  margin-top: 24px;
-`;
+const S = {
+  Memo: styled.div`
+    width: 720px;
+    margin-top: 24px;
+  `,
+  PostButton: styled(Button)`
+    margin-bottom: 8px;
+  `,
+};
 
 function MyPage() {
-  return (
-    <>
-      <p>마이 페이지입니다.</p>
+  const { status } = useSession();
 
-      <Link href="my/memo/create">
-        <PostButton>메모 등록하기</PostButton>
-      </Link>
+  if (status === 'authenticated') {
+    return (
+      <>
+        <p>마이 페이지입니다.</p>
 
-      <MemoList />
-    </>
-  );
+        <S.Memo>
+          <Link href="my/memo/create">
+            <S.PostButton type="submit">메모 등록하기</S.PostButton>
+          </Link>
+
+          <MemoListFeature />
+        </S.Memo>
+      </>
+    );
+  }
+
+  return <></>;
 }
 
 export default MyPage;

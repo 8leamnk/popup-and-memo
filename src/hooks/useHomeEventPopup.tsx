@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '@/provider/hooks';
-import { getPopupInfo, handleHomeEventPopupIndex } from '@/slices/popupSlice';
+import { handleHomeEventPopupIndex } from '@/slices/popupSlice';
+import usePopup from './usePopup';
 import { PopupInner, PopupServerData } from '@/constants/types';
 
 const ERROR_MESSAGE: PopupInner = {
@@ -14,6 +15,7 @@ const ERROR_MESSAGE: PopupInner = {
 
 function useHomeEventPopup(isComebackHome: boolean) {
   const { homeEventPopupIndex } = useAppSelector((state) => state.popup);
+  const { openPopup } = usePopup();
   const dispatch = useAppDispatch();
   const [popupData, setPopupData] = useState<PopupServerData>({});
   const [isRetry, setIsretry] = useState<boolean>(false);
@@ -21,8 +23,6 @@ function useHomeEventPopup(isComebackHome: boolean) {
   const fetchData = async (): Promise<void> => {
     try {
       const { data } = await axios.get('/api/popup');
-
-      // console.log('data', data);
 
       if (data.status === 200) {
         setPopupData(data.data);
@@ -46,14 +46,16 @@ function useHomeEventPopup(isComebackHome: boolean) {
     ) {
       dispatch(handleHomeEventPopupIndex());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComebackHome]);
 
   useEffect(() => {
     if (isRetry) {
-      dispatch(getPopupInfo(ERROR_MESSAGE));
+      openPopup(ERROR_MESSAGE);
     } else if (!!popupData[homeEventPopupIndex]) {
-      dispatch(getPopupInfo(popupData[homeEventPopupIndex]));
+      openPopup(popupData[homeEventPopupIndex]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homeEventPopupIndex]);
 
   useEffect(() => {

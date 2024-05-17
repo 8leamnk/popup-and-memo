@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client';
+import { bubbleSort } from '@/lib/utils';
 
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = Number(searchParams.get('id'));
+  const email = searchParams.get('email') || '';
   const isUnique = Number(searchParams.get('isUnique'));
 
   try {
@@ -14,12 +16,9 @@ export async function GET(request: Request) {
       const response = await prisma.memo.findUnique({ where: { id } });
       result = { ...response, id: Number(response?.id) };
     } else {
-      const response = await prisma.memo.findMany({
-        where: { id: { gte: id, lte: id + 9 } },
-      });
-      result = response.map((item) => {
-        return { ...item, id: Number(item.id) };
-      });
+      const response = await prisma.memo.findMany({ where: { email } });
+      const data = response.map((item) => ({ ...item, id: Number(item?.id) }));
+      result = bubbleSort(data);
     }
 
     return Response.json({ data: result });
@@ -35,6 +34,7 @@ export async function POST(request: Request) {
       data: {
         title: body.title,
         content: body.content,
+        email: body.email,
       },
     });
 
