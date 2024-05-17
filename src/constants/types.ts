@@ -1,5 +1,15 @@
 import React from 'react';
 
+declare module 'next-auth' {
+  interface Response {
+    name: string;
+  }
+
+  interface Profile {
+    response: Response;
+  }
+}
+
 export interface DataType {
   id: number;
 }
