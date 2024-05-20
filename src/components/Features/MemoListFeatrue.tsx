@@ -9,7 +9,7 @@ import { LOADING_FEED_MEMO } from '@/constants/message';
 import Table from '../Organisms/Table';
 
 function MemoListFeature() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [memoList, setMemoList] = useState<MemoType[]>([]);
 
@@ -28,9 +28,11 @@ function MemoListFeature() {
   };
 
   useEffect(() => {
-    getMemoList();
+    if (status === 'authenticated') {
+      getMemoList();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [status]);
 
   const headerInfo = [
     { id: 1, children: '번호', width: '80px', flex: 'none' },
