@@ -1,37 +1,14 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 import { fetchtMemo } from '@/actions/memo.actions';
 import { MemoType } from '@/constants/types';
 import SelectedMemo from '../Organisms/SelectedMemo';
 
-function SelectedMemoFeature() {
-  const params = useParams();
-  const { status } = useSession();
-  const [memo, setMemo] = useState<MemoType | null>(null);
+async function SelectedMemoFeature({ id }: { id: string }) {
+  const session = await getServerSession(authOptions);
+  const memo: MemoType = await fetchtMemo(id);
 
-  const getMemo = async () => {
-    try {
-      const data = await fetchtMemo(params.id);
-      setMemo(data);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log('message', error.message);
-      }
-      console.log('불러오기 중 오류가 발생했습니다.');
-    }
-  };
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      getMemo();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
-
-  if (memo) {
+  if (session && memo) {
     return <SelectedMemo memo={memo} />;
   }
 
