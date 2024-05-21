@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import ProfileImage from '../Atoms/ProfileImage';
 import ProfileName from '../Atoms/ProfileName';
