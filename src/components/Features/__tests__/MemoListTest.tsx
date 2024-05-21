@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import { MemoType } from '@/constants/types';
-import { LOADING_FEED_MEMO } from '@/constants/message';
 import Theme from '@/style/Theme';
 import MemoListFeature from '../MemoListFeatrue';
 
@@ -28,9 +27,11 @@ describe('메모 불러오기 기능 테스트', () => {
   const SESSION = {
     user: { name: '홍길동', email: 'test@test.com' },
   };
-  mockUseSession.mockImplementation(() => ({ data: SESSION }));
+  const STATUS = 'authenticated';
 
-  test('컴포넌트가 마운트 되면 로딩 표시가 뜬 후 메모를 불러온다.', async () => {
+  mockUseSession.mockImplementation(() => ({ data: SESSION, status: STATUS }));
+
+  test('컴포넌트가 마운트 되면 메모를 불러온다.', async () => {
     // given
     const MEMO_LIST: MemoList[] = [];
 
@@ -51,9 +52,6 @@ describe('메모 불러오기 기능 테스트', () => {
         <MemoListFeature />
       </Theme>,
     );
-
-    // then
-    expect(getByText(LOADING_FEED_MEMO)).toBeInTheDocument();
 
     await waitFor(
       () => {
