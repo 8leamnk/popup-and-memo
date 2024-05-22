@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import { MemoType } from '@/constants/types';
+import { LOADING_FEED_MEMO } from '@/constants/message';
 import Theme from '@/style/Theme';
 import MemoListFeature from '../MemoListFeatrue';
 
@@ -8,14 +9,12 @@ interface MemoList extends MemoType {
   email: string;
 }
 
-const mockGetSession = jest.fn();
+const mockUseSession = jest.fn();
 const mockFetchMemoList = jest.fn();
 
-jest.mock('@/lib/authOptions');
-
-jest.mock('next-auth', () => ({
-  getServerSession() {
-    return mockGetSession();
+jest.mock('next-auth/react', () => ({
+  useSession() {
+    return mockUseSession();
   },
 }));
 
@@ -29,8 +28,27 @@ describe('메모 불러오기 기능 테스트', () => {
   const SESSION = {
     user: { name: '홍길동', email: 'test@test.com' },
   };
+  const STATUS = 'authenticated';
 
-  mockGetSession.mockResolvedValue(() => SESSION);
+  mockUseSession.mockImplementation(() => ({ data: SESSION, status: STATUS }));
+
+  test('컴포넌트가 마운트 되면 메모를 불러오는 동안 로딩 표시가 뜬다.', async () => {
+    // when
+    const { getByText, queryByText } = render(
+      <Theme>
+        <MemoListFeature />
+      </Theme>,
+    );
+
+    await waitFor(
+      () => {
+        expect(getByText(LOADING_FEED_MEMO)).toBeInTheDocument();
+        expect(queryByText('메모 NO.1')).not.toBeInTheDocument();
+        expect(queryByText(`2024-05-01`)).not.toBeInTheDocument();
+      },
+      { timeout: 100 },
+    );
+  });
 
   test('컴포넌트가 마운트 되면 메모를 불러온다.', async () => {
     // given
@@ -46,10 +64,13 @@ describe('메모 불러오기 기능 테스트', () => {
       });
     }
 
+    // when
     mockFetchMemoList.mockResolvedValue(MEMO_LIST);
 
     const { getByText, queryByText } = render(
-      <Theme>{await MemoListFeature()}</Theme>,
+      <Theme>
+        <MemoListFeature />
+      </Theme>,
     );
 
     await waitFor(
