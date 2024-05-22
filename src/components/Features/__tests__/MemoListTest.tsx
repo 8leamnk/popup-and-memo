@@ -8,12 +8,14 @@ interface MemoList extends MemoType {
   email: string;
 }
 
-const mockUseSession = jest.fn();
+const mockGetSession = jest.fn();
 const mockFetchMemoList = jest.fn();
 
-jest.mock('next-auth/react', () => ({
-  useSession() {
-    return mockUseSession();
+jest.mock('@/lib/authOptions');
+
+jest.mock('next-auth', () => ({
+  getServerSession() {
+    return mockGetSession();
   },
 }));
 
@@ -27,9 +29,8 @@ describe('메모 불러오기 기능 테스트', () => {
   const SESSION = {
     user: { name: '홍길동', email: 'test@test.com' },
   };
-  const STATUS = 'authenticated';
 
-  mockUseSession.mockImplementation(() => ({ data: SESSION, status: STATUS }));
+  mockGetSession.mockResolvedValue(() => SESSION);
 
   test('컴포넌트가 마운트 되면 메모를 불러온다.', async () => {
     // given
@@ -48,9 +49,7 @@ describe('메모 불러오기 기능 테스트', () => {
     mockFetchMemoList.mockResolvedValue(MEMO_LIST);
 
     const { getByText, queryByText } = render(
-      <Theme>
-        <MemoListFeature />
-      </Theme>,
+      <Theme>{await MemoListFeature()}</Theme>,
     );
 
     await waitFor(
