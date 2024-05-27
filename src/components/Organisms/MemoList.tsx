@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo } from 'react';
 import Link from 'next/link';
 import { MemoType } from '@/constants/types';
 import Table from './Table';
@@ -10,14 +9,11 @@ interface MemoListProps {
 }
 
 function MemoList({ memoList }: MemoListProps) {
-  const headerInfo = useMemo(
-    () => [
-      { id: 1, children: '번호', width: '80px', flex: 'none' },
-      { id: 2, children: '제목', width: '100%', flex: '1' },
-      { id: 3, children: '등록된 날짜', width: '120px', flex: 'none' },
-    ],
-    [],
-  );
+  const headerInfo = [
+    { id: 1, children: '번호', width: '80px', flex: 'none' },
+    { id: 2, children: '제목', width: '100%', flex: '1' },
+    { id: 3, children: '등록된 날짜', width: '120px', flex: 'none' },
+  ];
 
   const getBodyInfo = (memo: MemoType, index: number) => {
     return [

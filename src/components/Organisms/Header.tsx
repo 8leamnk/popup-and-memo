@@ -8,44 +8,41 @@ import PageLink from '../Atoms/PageLink';
 import LoginOrLogout from './LoginOrLogout';
 
 // style
-const Wrapper = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: ${({ theme }) => `${theme.fixedValues.headerHeight}px`};
-  padding: 0 16px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
+const S = {
+  Header: styled.header`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: ${({ theme }) => `${theme.fixedValues.headerHeight}px`};
+    padding: 0 16px;
+    background-color: ${({ theme }) => theme.colors.primary};
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  `,
+};
 
 // constant
 const PAGES: PageInfo[] = [
   { name: 'HOME', href: '/' },
   { name: 'ABOUT', href: '/about' },
-  { name: 'MY', href: '/my' },
 ];
 
 function Header() {
   const { status } = useSession();
 
   return (
-    <Wrapper>
+    <S.Header>
       <Navigation>
-        {PAGES.map((page) => {
-          if (page.name === 'MY' && status !== 'authenticated') {
-            return '';
-          }
-
-          return <PageLink key={page.href} pageInfo={page} />;
-        })}
+        {PAGES.map((page) => (
+          <PageLink key={page.href} pageInfo={page} />
+        ))}
       </Navigation>
 
       <LoginOrLogout />
-    </Wrapper>
+    </S.Header>
   );
 }
 

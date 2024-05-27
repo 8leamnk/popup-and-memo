@@ -28,9 +28,29 @@ describe('메모 불러오기 기능 테스트', () => {
   const SESSION = {
     user: { name: '홍길동', email: 'test@test.com' },
   };
-  mockUseSession.mockImplementation(() => ({ data: SESSION }));
+  const STATUS = 'authenticated';
 
-  test('컴포넌트가 마운트 되면 로딩 표시가 뜬 후 메모를 불러온다.', async () => {
+  mockUseSession.mockImplementation(() => ({ data: SESSION, status: STATUS }));
+
+  test('컴포넌트가 마운트 되면 메모를 불러오는 동안 로딩 표시가 뜬다.', async () => {
+    // when
+    const { getByText, queryByText } = render(
+      <Theme>
+        <MemoListFeature />
+      </Theme>,
+    );
+
+    await waitFor(
+      () => {
+        expect(getByText(LOADING_FEED_MEMO)).toBeInTheDocument();
+        expect(queryByText('메모 NO.1')).not.toBeInTheDocument();
+        expect(queryByText(`2024-05-01`)).not.toBeInTheDocument();
+      },
+      { timeout: 100 },
+    );
+  });
+
+  test('컴포넌트가 마운트 되면 메모를 불러온다.', async () => {
     // given
     const MEMO_LIST: MemoList[] = [];
 
@@ -44,6 +64,7 @@ describe('메모 불러오기 기능 테스트', () => {
       });
     }
 
+    // when
     mockFetchMemoList.mockResolvedValue(MEMO_LIST);
 
     const { getByText, queryByText } = render(
@@ -51,9 +72,6 @@ describe('메모 불러오기 기능 테스트', () => {
         <MemoListFeature />
       </Theme>,
     );
-
-    // then
-    expect(getByText(LOADING_FEED_MEMO)).toBeInTheDocument();
 
     await waitFor(
       () => {

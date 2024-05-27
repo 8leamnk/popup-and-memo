@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import Content from '../Atoms/Content';
 import Date from '../Atoms/Date';

@@ -2,22 +2,13 @@ import '@testing-library/jest-dom';
 import { render, waitFor } from '@testing-library/react';
 import Theme from '@/style/Theme';
 import SelectedMemoFeature from '../SelectedMemoFeature';
-import LoginCheck from '@/components/Organisms/LoginCheck';
-import { CHECK_AUTH_MESSAGE } from '@/constants/message';
 
-const mockUseSession = jest.fn();
+const mockGetServerSession = jest.fn();
 const mockFetchMemo = jest.fn();
 
-jest.mock('next/navigation', () => ({
-  ...jest.requireActual('next/navigation'),
-  useParams() {
-    return { id: 7 };
-  },
-}));
-
-jest.mock('next-auth/react', () => ({
-  useSession() {
-    return mockUseSession();
+jest.mock('next-auth', () => ({
+  getServerSession() {
+    return mockGetServerSession();
   },
 }));
 
@@ -28,6 +19,7 @@ jest.mock('@/actions/memo.actions', () => ({
 }));
 
 describe('해당 메모 보여주기 기능 테스트', () => {
+  // given
   const MEMO = {
     id: 7,
     createdAt: '2024-05-16',
@@ -38,36 +30,17 @@ describe('해당 메모 보여주기 기능 테스트', () => {
 
   test('해당 메모 페이지에 진입 후 사용자 정보가 파악 되지 않으면 메모를 보여주지 않는다.', async () => {
     // given
-    mockUseSession.mockImplementation(() => ({ status: 'loading' }));
+    mockGetServerSession.mockResolvedValue(null);
 
-    const { getByText, rerender } = render(
-      <Theme>
-        <SelectedMemoFeature />
-        <LoginCheck />
-      </Theme>,
+    const { queryByText } = render(
+      <Theme>{await SelectedMemoFeature({ id: '7' })}</Theme>,
     );
 
     // then
     await waitFor(
       () => {
-        expect(getByText(CHECK_AUTH_MESSAGE)).toBeInTheDocument();
-      },
-      { timeout: 100 },
-    );
-
-    // when
-    mockUseSession.mockImplementation(() => ({ status: 'unauthenticated' }));
-    rerender(
-      <Theme>
-        <SelectedMemoFeature />
-        <LoginCheck />
-      </Theme>,
-    );
-
-    // then
-    await waitFor(
-      () => {
-        expect(mockFetchMemo).toHaveBeenCalledTimes(0);
+        expect(queryByText(MEMO.title)).not.toBeInTheDocument();
+        expect(queryByText(MEMO.createdAt)).not.toBeInTheDocument();
       },
       { timeout: 100 },
     );
@@ -75,37 +48,16 @@ describe('해당 메모 보여주기 기능 테스트', () => {
 
   test('해당 메모 페이지에 진입 후 사용자 정보가 파악 되면 해당 메모를 보여준다.', async () => {
     // when
-    mockUseSession.mockImplementation(() => ({ status: 'loading' }));
+    mockGetServerSession.mockResolvedValue(true);
     mockFetchMemo.mockResolvedValue(MEMO);
 
-    const { getByText, rerender } = render(
-      <Theme>
-        <SelectedMemoFeature />
-        <LoginCheck />
-      </Theme>,
+    const { getByText } = render(
+      <Theme>{await SelectedMemoFeature({ id: '7' })}</Theme>,
     );
 
     // then
     await waitFor(
       () => {
-        expect(getByText(CHECK_AUTH_MESSAGE)).toBeInTheDocument();
-      },
-      { timeout: 100 },
-    );
-
-    // when
-    mockUseSession.mockImplementation(() => ({ status: 'authenticated' }));
-    rerender(
-      <Theme>
-        <SelectedMemoFeature />
-        <LoginCheck />
-      </Theme>,
-    );
-
-    // then
-    await waitFor(
-      () => {
-        expect(mockFetchMemo).toHaveBeenCalledTimes(1);
         expect(getByText(MEMO.title)).toBeInTheDocument();
         expect(getByText(MEMO.createdAt)).toBeInTheDocument();
         MEMO.content.split(/\n/).forEach((text) => {
