@@ -24,7 +24,7 @@ function SelectedMemo({ memo }: SelectedMemoProps) {
         <Title>{memo.title}</Title>
         <Content>
           {`등록일: `}
-          <Date>{memo.createdAt}</Date>
+          <Date>{memo.createdAt.split('T')[0]}</Date>
         </Content>
       </MemoInfo>
 
