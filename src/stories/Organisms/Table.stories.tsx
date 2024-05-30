@@ -87,10 +87,9 @@ function getBodyInfo(list: TableList, index: number): TableBodyInfo[] {
 const meta = {
   title: 'Organisms/Table',
   component: Table,
-  parameters: { layout: 'centered' },
   tags: ['autodocs'],
   args: {
-    width: '720px',
+    maxWidth: '720px',
     tableLists,
     headerInfo,
     getBodyInfo,
@@ -103,7 +102,7 @@ type StoryType = StoryObj<typeof Table<TableList>>;
 
 export const Meeting: StoryType = {
   args: {
-    width: '720px',
+    maxWidth: '720px',
     tableLists,
     headerInfo,
     getBodyInfo,
