@@ -11,9 +11,9 @@ import {
 import TableHeader from '../Molcules/TableHeader';
 
 const Wrapper = styled.ul<{
-  $width: string;
+  $maxWidth: string;
 }>`
-  width: ${({ $width }) => $width};
+  width: ${({ $maxWidth }) => `clamp(320px, 100%, ${$maxWidth})`};
   border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
   border-right: none;
   border-bottom: none;
@@ -21,20 +21,20 @@ const Wrapper = styled.ul<{
 `;
 
 interface TableProps<TableListType> {
-  width?: string;
+  maxWidth?: string;
   headerInfo: TableHeaderInfo[];
   tableLists: TableListType[];
   getBodyInfo: (list: TableListType, index: number) => TableBodyInfo[];
 }
 
 function Table<TableListType extends TableListInfo>({
-  width = '100%',
+  maxWidth = '100%',
   headerInfo,
   tableLists,
   getBodyInfo,
 }: TableProps<TableListType>) {
   return (
-    <Wrapper $width={width}>
+    <Wrapper $maxWidth={maxWidth}>
       <TableHeader headerInfo={headerInfo} />
 
       {tableLists.map((list, index) => {

@@ -47,7 +47,7 @@ function MemoList({ memoList }: MemoListProps) {
   if (memoList.length > 0) {
     return (
       <Table
-        width="720px"
+        maxWidth="720px"
         tableLists={memoList}
         headerInfo={headerInfo}
         getBodyInfo={getBodyInfo}

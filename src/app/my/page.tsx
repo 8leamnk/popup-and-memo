@@ -7,7 +7,6 @@ import Button from '@/components/Atoms/Button';
 
 const S = {
   section: `
-    width: 720px;
     margin-top: 24px;
   `,
   link: `
