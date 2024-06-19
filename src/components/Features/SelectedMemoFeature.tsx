@@ -3,9 +3,7 @@ import { MemoType } from '@/constants/types';
 import SelectedMemo from '../Organisms/SelectedMemo';
 
 async function SelectedMemoFeature({ id }: { id: string }) {
-  console.log('id', id);
   const memo: MemoType = await fetchtMemo(id);
-  console.log('memo', memo);
 
   if (memo) {
     return <SelectedMemo memo={memo} />;
