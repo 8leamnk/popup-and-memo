@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma';
-import { bubbleSort } from '@/lib/utils';
+import { convertBigIntToNumber } from '@/utils/util';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -12,11 +12,13 @@ export async function GET(request: Request) {
 
     if (isUnique) {
       const response = await prisma.memo.findUnique({ where: { id } });
-      result = { ...response, id: Number(response?.id) };
+      result = convertBigIntToNumber(response);
     } else {
-      const response = await prisma.memo.findMany({ where: { email } });
-      const data = response.map((item) => ({ ...item, id: Number(item?.id) }));
-      result = bubbleSort(data);
+      const response = await prisma.memo.findMany({
+        where: { email },
+        orderBy: { id: 'desc' },
+      });
+      result = convertBigIntToNumber(response);
     }
 
     return Response.json({ data: result });
