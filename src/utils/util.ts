@@ -1,4 +1,4 @@
-import { SinglyLinkedList, SinglyNode } from '@/constants/types';
+import { DataType, SinglyLinkedList, SinglyNode } from '@/constants/types';
 
 interface SinglyPop<T> {
   list: SinglyLinkedList<T>;
@@ -42,3 +42,30 @@ export const SinglyLinkedListMethods = {
     return { list, removedNode };
   },
 };
+
+export const convertBigIntToNumber = <T>(data: T) => {
+  const updatedData = JSON.stringify(data, (_, value) =>
+    typeof value === 'bigint' ? Number(value) : value,
+  );
+
+  return updatedData;
+};
+
+export function bubbleSort<T extends DataType>(arr: T[]) {
+  const result = [...arr];
+
+  for (let i = result.length; i > 0; i -= 1) {
+    let noSwap = true;
+
+    for (let j = 0; j < i - 1; j += 1) {
+      if (result[j].id > result[j + 1].id) {
+        [result[j + 1], result[j]] = [result[j], result[j + 1]];
+        noSwap = false;
+      }
+    }
+
+    if (noSwap) break;
+  }
+
+  return result;
+}
